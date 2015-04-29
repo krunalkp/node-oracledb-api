@@ -1,0 +1,63 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="description" content="")
+    meta(name="author" content="Marco Stagni")
+
+    title
+        | Simple Sidebar - Start Bootstrap Template
+
+    // Bootstrap Core CSS
+    link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
+
+    // Custom CSS
+    link(href="styles/simple-sidebar.css", rel="stylesheet")
+
+    script(src="bower_components/jquery/dist/jquery.min.js")
+    script(src="bower_components/angular/angular.min.js")
+    script(src="bower_components/angular-route/angular-route.min.js")
+    script(src="bower_components/stayclassy/classy.js")
+    script(src="/scripts/wrangular.js")
+
+
+    // angular app here
+    script(src="/scripts/modules/app.js")
+    script(src="/scripts/services/API.js")
+    script(src="/scripts/controllers/Home.js")
+    script(src="/scripts/controllers/About.js")
+    //script(src="/scripts/test.js")
+
+body(ng-app="Veterinario")
+    div#wrapper
+        // Sidebar
+        div#sidebar-wrapper
+            ul.sidebar-nav
+                li.sidebar-brand
+                    a(ng-href="#/", href="#")
+                        | Home
+                li.sidebar-brand
+                    a(ng-href="#/about", href="#")
+                        | About
+                li.sidebar-brand
+                    a(href="#")
+                        | Start Bootstrap
+                li.sidebar-brand
+                    a(href="#")
+                        | Start Bootstrap
+        div#page-content-wrapper
+            div.container-fluid
+                div.row
+                    div.col-lg-12
+                        a#menu-toggle.btn.btn-default(href="#menu-toggle")
+                            | Toggle Menu
+                div.row
+                    div.col-lg-12(ng-view="")
+
+    script
+        | $("#menu-toggle").click(function(e) {
+        |    e.preventDefault();
+        |    $("#wrapper").toggleClass("toggled");
+        |});
