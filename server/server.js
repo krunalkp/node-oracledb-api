@@ -14,7 +14,7 @@ app.use(morgan('dev')); // log requests to the console
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port     = process.env.PORT || 8080; // set our port
+var port     = 10000;//process.env.PORT || 8080; // set our port
 
 // getting models
 var Animal = require("./Models/Animal"),
