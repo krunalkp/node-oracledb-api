@@ -59,6 +59,11 @@ module.exports = (grunt) ->
             dest: '<%= config.dist %>/scripts'},
           {
             expand: true
+            cwd: '<%= config.app %>/styles'
+            src: '**/*.css'
+            dest: '<%= config.dist %>/styles'},
+          {
+            expand: true
             cwd: '<%= config.app %>'
             src: ['*.ico','*.txt']
             dest: '<%= config.dist %>'},

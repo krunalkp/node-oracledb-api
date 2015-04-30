@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stones Application</title>
+    <!-- bower_components CSS here-->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- custom CSS here-->
+    <link rel="stylesheet" href="/styles/style.css">
+  </head>
+  <body ng-app="Veterinario">
+    <div class="container-fluid text-center">
+      <nav class="text-center">
+        <ul class="nav nav-pills">
+          <li><a ng-href="#/" href="#">Home</a></li>
+          <li><a ng-href="#/about" href="#">About</a></li>
+        </ul>
+      </nav>
+      <div ng-view=""></div>
+    </div>
+    <!-- bower_components JS here-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <!-- angular app here-->
+    <script src="/scripts/app.js"></script>
+    <script src="/scripts/controllers/homeController.js"></script>
+    <script src="/scripts/controllers/aboutController.js"></script>
+  </body>
+</html>
