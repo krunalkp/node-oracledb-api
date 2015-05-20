@@ -15,9 +15,9 @@ DB.prototype.connect = function() {
     var promise = new this.Promise(function(resolve, reject) {
          self.oracledb.getConnection({
             // user informations
-            user          : self.dbConfig.user,
-            password      : self.dbConfig.password,
-            connectString : self.dbConfig.connectString
+            user          : self.config.user,
+            password      : self.config.password,
+            connectString : self.config.connectString
         }, function(err, connection) {
             if (err) {
                 console.log("si è verificato un errore");
