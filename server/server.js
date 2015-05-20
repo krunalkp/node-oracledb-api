@@ -6,7 +6,9 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
 var morgan     = require('morgan');
-var db         = new require("./DB")();
+var OracleDB   = require("./DB");
+
+var db = new OracleDB();
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
