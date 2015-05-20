@@ -6,29 +6,43 @@ function DB() {
     this.oracledb = require("oracledb");
     // getting config
     this.config = require("./dbconfig");
+    // promises
+    this.Promise = require("promise");
 }
 
 DB.prototype.connect = function() {
-    //connecting to db using oracledb.getconnection
-    this.oracledb.getConnection({
-        // user informations
-        user          : dbConfig.user,
-        password      : dbConfig.password,
-        connectString : dbConfig.connectString
-    }, function(err, connection) {
-        if (err) {
-            console.log("si è verificato un errore");
-            console.log(err);
-            console.error(err.message);
-            return;
-        }
-        console.log('Connection was successful!');
-
-        connection.release(function(err) {
+    var self = this;
+    var promise = new this.Promise(function(resolve, reject) {
+         self.oracledb.getConnection({
+            // user informations
+            user          : self.dbConfig.user,
+            password      : self.dbConfig.password,
+            connectString : self.dbConfig.connectString
+        }, function(err, connection) {
             if (err) {
+                console.log("si è verificato un errore");
+                console.log(err);
                 console.error(err.message);
-                return;
+                reject("no able to connect to db")
+            } else {
+                /*
+                console.log('Connection was successful!');
+
+                connection.release(function(err) {
+                    if (err) {
+                        console.error(err.message);
+                        return;
+                    }
+                });*/
+                resolve("connection ok");
             }
         });
     });
-}
+
+    // returning the promise
+    return promise;
+   
+};
+
+
+module.exports = DB;

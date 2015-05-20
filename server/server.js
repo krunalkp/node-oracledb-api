@@ -6,6 +6,7 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
 var morgan     = require('morgan');
+var db         = new require("./DB")();
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
@@ -55,7 +56,13 @@ router.route('/animal')
 
     // get all the animal (accessed at GET http://localhost:8080/api/animal)
     .get(function(req, res) {
-        // getting all 
+        // getting all
+        console.log("trying to connect to db using promises");
+        db.connect().then(function(value) {
+            console.log(value);
+        }).catch(function() {
+            console.log("errore");
+        });
     });
 
 // on routes that end in /animal/:bear_id
