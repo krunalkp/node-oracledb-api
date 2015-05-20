@@ -23,17 +23,17 @@ DB.prototype.connect = function() {
                 console.log("si è verificato un errore");
                 console.log(err);
                 console.error(err.message);
+                // rejecting promise
                 reject("no able to connect to db")
             } else {
                 /*
-                console.log('Connection was successful!');
-
                 connection.release(function(err) {
                     if (err) {
                         console.error(err.message);
                         return;
                     }
                 });*/
+                // resolving promise
                 resolve("connection ok");
             }
         });

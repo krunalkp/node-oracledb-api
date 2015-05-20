@@ -62,8 +62,10 @@ router.route('/animal')
         console.log("trying to connect to db using promises");
         db.connect().then(function(value) {
             console.log(value);
+            res.send(value);
         }).catch(function() {
-            console.log("errore");
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
         });
     });
 
