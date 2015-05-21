@@ -120,7 +120,7 @@ router.route('/type')
     // create a bear (accessed at POST http://localhost:8080/type)
     .post(function(req, res) {
         // creating an type
-        console.log(req.body);
+        console.log(req);
         var type = new Type(
             req.body.type
         );
