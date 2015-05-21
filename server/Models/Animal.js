@@ -30,7 +30,7 @@ Animal.prototype.toarray = function() {
 // creating table inside db
 var OracleDB = require("../DB").DB;
 var db = new OracleDB();
-
+/*
 db.connect().then(function(value) {
     var query = "DROP TABLE vet_animals PURGE";
 
@@ -57,7 +57,7 @@ db.connect().then(function(value) {
             db.close();
         });
     });
-});
+});*/
 
 // exporting animal module
 module.exports = Animal;
