@@ -180,8 +180,12 @@ DB.prototype.select = function(tablename, fields) {
 DB.prototype.selectAll = function(tablename, callback) {
     if (this.connection) {
         this.connection.execute("SELECT * FROM " + tablename, function(err, result) {
-            if (callback) {
-                callback({status: "ok", message: result});
+            if (err) {
+                callback({status: "notok", message: err});
+            } else {
+                if (callback) {
+                    callback({status: "ok", message: result});
+                }
             }
         });
     } else {
