@@ -179,6 +179,7 @@ DB.prototype.select = function(tablename, fields) {
 // select all
 DB.prototype.selectAll = function(tablename, callback) {
     if (this.connection) {
+        console.log("SELECT * FROM " + tablename);
         this.connection.execute("SELECT * FROM " + tablename, function(err, result) {
             if (err) {
                 callback({status: "notok", message: err});
