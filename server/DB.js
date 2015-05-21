@@ -142,7 +142,7 @@ DB.prototype.insert = function(tablename, params, callback) {
         }
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
-        console.log(params);
+        console.log(p);
         this.connection.execute(query, p, {autoCommit: true}, function(err, result) {
             if (err) {
                 if (callback) {
