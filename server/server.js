@@ -121,7 +121,7 @@ router.route('/type')
     .post(function(req, res) {
         // creating an type
         var type = new Type(
-            req.body.type,
+            req.body.type
         );
 
         // creating connection to db
