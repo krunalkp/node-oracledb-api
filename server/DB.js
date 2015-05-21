@@ -115,7 +115,7 @@ DB.prototype.execute = function(command, callback) {
     if (this.connection) {
         this.connection.execute(command, function(err, result) {
             if (err) {
-                callback("ERROR");
+                callback("ERROR", err);
             } else {
                 if (callback) {
                     callback(result);

@@ -26,8 +26,9 @@ db.connect().then(function(value) {
     query += "COMMIT";
 
     console.log("about to create table vet_types");
-    db.execute(query, function(result) {
+    db.execute(query, function(result, err) {
         console.log(result);
+        console.log(err);
     });
 });
 
