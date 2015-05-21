@@ -25,7 +25,7 @@ db.connect().then(function(value) {
         query = "CREATE TABLE vet_types (";
         query += "type varchar2(20) NOT NULL, ";
         query += "CONSTRAINT vet_types_pk PRIMARY KEY (type));"
-        query += "COMMIT;";
+        //query += "COMMIT;";
 
     console.log("about to create table vet_types");
     db.execute(query, function(result, err) {
