@@ -4,6 +4,7 @@
 // call the packages we need
 var express    = require('express');
 var bodyParser = require('body-parser');
+var multer     = require('multer');
 var app        = express();
 var morgan     = require('morgan');
 var OracleDB   = require("./DB").DB;
@@ -16,6 +17,7 @@ app.use(morgan('dev')); // log requests to the console
 // configure body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(multer());
 
 var port     = 10000;//process.env.PORT || 8080; // set our port
 
