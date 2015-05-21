@@ -21,9 +21,9 @@ var OracleDB = require("../DB").DB;
 var db = new OracleDB();
 
 db.connect().then(function(value) {
-    var query = "DROP TABLE vet_types PURGE;\n"
-    query += "CREATE TABLE vet_types (type TEXT(20) NOT NULL PRIMARY KEY);\n";
-    query += "COMMIT;\n";
+    //var query = "DROP TABLE vet_types PURGE;\n"
+    var query = "CREATE TABLE vet_types (type TEXT(20) NOT NULL PRIMARY KEY);\n";
+    //query += "COMMIT;\n";
 
     console.log("about to create table vet_types");
     db.execute(query, function(result, err) {
