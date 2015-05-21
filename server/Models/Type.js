@@ -24,11 +24,11 @@ db.connect().then(function(connection) {
     var query = "DROP TABLE vet_types PURGE";
 
     console.log("about to create table vet_types");
-    db.execute(connection, query, function(result, err) {
+    db.execute(connection, query, function(connection, result, err) {
 
         if (err) {
             console.log(err);
-            db.close();
+            db.close(connection);
             return;
         }
 
@@ -36,7 +36,7 @@ db.connect().then(function(connection) {
         query += "type VARCHAR2(20) NOT NULL, ";
         query += "CONSTRAINT vet_types_pk PRIMARY KEY (type))"
 
-        db.execute(connection, query, function(result, err) {
+        db.execute(connection, query, function(connection, result, err) {
             if (err) {
                 console.log(err);
                 db.close(connection);
