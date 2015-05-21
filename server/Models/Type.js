@@ -22,7 +22,9 @@ var db = new OracleDB();
 
 db.connect().then(function(value) {
     //var query = "DROP TABLE vet_types PURGE;\n"
-    var query = "CREATE TABLE vet_types (type TEXT(20) NOT NULL PRIMARY KEY)";
+    var query = "CREATE TABLE vet_types (";
+    query += "type varchar2(20) NOT NULL, ";
+    query += "CONSTRAINT vet_types_pk PRIMARY KEY (type))"
     //query += "COMMIT;\n";
 
     console.log("about to create table vet_types");
