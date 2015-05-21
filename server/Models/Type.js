@@ -4,7 +4,7 @@ function Type(type) {
 
         + type
     */
-    this.type = type;
+    this.type = String(type);
 }
 
 // converting this object to json
@@ -33,7 +33,7 @@ db.connect().then(function(value) {
         }
 
         query = "CREATE TABLE vet_types (";
-        query += "type varchar2(20) NOT NULL, ";
+        query += "type VARCHAR2(20) NOT NULL, ";
         query += "CONSTRAINT vet_types_pk PRIMARY KEY (type))"
 
         db.execute(query, function(result, err) {

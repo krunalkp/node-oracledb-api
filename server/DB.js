@@ -141,7 +141,7 @@ DB.prototype.insert = function(tablename, params, callback) {
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(params);
-        this.connection.execute(query, params, function(err, result) {
+        this.connection.execute(query, params, {autoCommit: true}, function(err, result) {
             if (err) {
                 if (callback) {
                     callback({status: "notok", message: err});
