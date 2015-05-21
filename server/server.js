@@ -123,7 +123,7 @@ router.route('/type')
         var type = new Type(
             req.body.type
         );
-
+        console.log(type.toarray());
         // creating connection to db
         db.connect().then(function(value) {
             // performing insert

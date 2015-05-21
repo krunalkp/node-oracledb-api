@@ -119,7 +119,7 @@ DB.prototype.execute = function(command, callback) {
     if (this.connection) {
         this.connection.execute(command, function(err, result) {
             if (err) {
-                callback("ERROR", err);
+                callback({status: "notok", message: err});
             } else {
                 if (callback) {
                     callback({status: "ok", message: result});
@@ -140,8 +140,14 @@ DB.prototype.insert = function(tablename, params, callback) {
         }
         query = query.slice(0, query.length-2) + ")";
         this.connection.execute(query, params, function(err, result) {
-            if (callback) {
-                callback({status: "ok", message: result});
+            if (err) {
+                if (callback) {
+                    callback({status: "notok", message: err});
+                }
+            } else {
+                if (callback) {
+                    callback({status: "ok", message: result});
+                }
             }
         });
     } else {
