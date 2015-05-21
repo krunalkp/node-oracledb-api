@@ -136,9 +136,11 @@ DB.prototype.insert = function(tablename, params, callback) {
     if (this.connection) {
         var query = "INSERT INTO " + tablename + " VALUES ("
         for (var i in params) {
-            query += ":" + i + ", ";
+            query += ":v" + i + ", ";
         }
         query = query.slice(0, query.length-2) + ")";
+        console.log(query);
+        console.log(params);
         this.connection.execute(query, params, function(err, result) {
             if (err) {
                 if (callback) {
