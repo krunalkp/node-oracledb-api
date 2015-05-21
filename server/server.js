@@ -39,6 +39,7 @@ router.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     console.log('Something is happening.');
+    console.log(req.body);
     next();
 });
 
@@ -120,7 +121,6 @@ router.route('/type')
     // create a bear (accessed at POST http://localhost:8080/type)
     .post(function(req, res) {
         // creating an type
-        console.log(req);
         var type = new Type(
             req.body.type
         );
