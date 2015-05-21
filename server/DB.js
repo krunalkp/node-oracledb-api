@@ -87,12 +87,12 @@ DB.prototype.connect = function() {
                 console.log(err);
                 console.error(err.message);
                 // rejecting promise
-                reject("no able to connect to db")
+                reject()
             } else {
                 // temporary storing connection
-                self.connection = connection;
+                self.connection = true;
                 // resolving promise
-                resolve("connection ok");
+                resolve(connection);
             }
         });
     });
@@ -102,9 +102,9 @@ DB.prototype.connect = function() {
 };
 
 // releasing connection to database
-DB.prototype.close = function() {
+DB.prototype.close = function(connection) {
     if (this.connection) {
-        this.connection.release(function(err) {
+        connection.release(function(err) {
             if (err) {
                 throw new Error("error while closing connection");
             }
@@ -115,9 +115,9 @@ DB.prototype.close = function() {
 };
 
 // perform command
-DB.prototype.execute = function(command, callback) {
+DB.prototype.execute = function(connection, command, callback) {
     if (this.connection) {
-        this.connection.execute(command, function(err, result) {
+        connection.execute(command, function(err, result) {
             if (err) {
                 callback({status: "notok", message: err});
             } else {
@@ -132,7 +132,7 @@ DB.prototype.execute = function(command, callback) {
 }
 
 // insert
-DB.prototype.insert = function(tablename, params, callback) {
+DB.prototype.insert = function(connection, tablename, params, callback) {
     if (this.connection) {
         var p = {};
         var query = "INSERT INTO " + tablename + " VALUES ("
@@ -143,7 +143,7 @@ DB.prototype.insert = function(tablename, params, callback) {
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(p);
-        this.connection.execute(query, p, {autoCommit: true}, function(err, result) {
+        connection.execute(query, p, {autoCommit: true}, function(err, result) {
             if (err) {
                 if (callback) {
                     callback({status: "notok", message: err});
@@ -160,7 +160,7 @@ DB.prototype.insert = function(tablename, params, callback) {
 };
 
 // select
-DB.prototype.select = function(tablename, fields) {
+DB.prototype.select = function(connection, tablename, fields) {
     if (this.connection) {
         // creating querystring
         var queryString = "SELECT ";
@@ -168,7 +168,7 @@ DB.prototype.select = function(tablename, fields) {
             queryString += fields[i] + ", ";
         }
         queryString = queryString.slice(0, queryString.length-2);
-        var query = new Query(queryString, this.connection);
+        var query = new Query(queryString, connection);
         // returning created query
         return query;
     } else {
@@ -177,10 +177,10 @@ DB.prototype.select = function(tablename, fields) {
 };
 
 // select all
-DB.prototype.selectAll = function(tablename, callback) {
+DB.prototype.selectAll = function(connection, tablename, callback) {
     if (this.connection) {
         console.log("SELECT * FROM " + tablename);
-        this.connection.execute("SELECT * FROM " + tablename, function(err, result) {
+        connection.execute("SELECT * FROM " + tablename, function(err, result) {
             if (err) {
                 callback({status: "notok", message: err});
             } else {

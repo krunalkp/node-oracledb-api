@@ -128,9 +128,9 @@ router.route('/type')
         );
         console.log(type.toarray());
         // creating connection to db
-        db.connect().then(function(value) {
+        db.connect().then(function(connection) {
             // performing insert
-            db.insert("vet_types", type.toarray(), function(data) {
+            db.insert(connection, "vet_types", type.toarray(), function(data) {
                 res.send(data)
                 db.close();
             });
@@ -144,9 +144,9 @@ router.route('/type')
     // get all the type (accessed at GET http://localhost:8080/api/type)
     .get(function(req, res) {
         // getting all
-        db.connect().then(function(value) {
+        db.connect().then(function(connection) {
             // querying for all the types
-            db.selectAll("OEHR_EMPLOYEES", function(data) {
+            db.selectAll(connection, "vet_types", function(data) {
                 db.close()
                 res.send(data);
             });
