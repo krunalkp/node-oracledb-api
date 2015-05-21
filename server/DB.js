@@ -134,14 +134,16 @@ DB.prototype.execute = function(command, callback) {
 // insert
 DB.prototype.insert = function(tablename, params, callback) {
     if (this.connection) {
+        var p = {};
         var query = "INSERT INTO " + tablename + " VALUES ("
         for (var i in params) {
             query += ":v" + i + ", ";
+            p['v'+i] = params[i];
         }
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(params);
-        this.connection.execute(query, params, {autoCommit: true}, function(err, result) {
+        this.connection.execute(query, p, {autoCommit: true}, function(err, result) {
             if (err) {
                 if (callback) {
                     callback({status: "notok", message: err});
