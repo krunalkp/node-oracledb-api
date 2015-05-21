@@ -65,10 +65,9 @@ router.route('/animal')
         // creating connection to db
         db.connect().then(function(value) {
             // performing insert
-            db.insert("ANIMAL", animal.toarray());
-        }).then(function(value) {
-            // closing connection to db
-            db.close();
+            db.insert("ANIMAL", animal.toarray(), function() {
+                db.close();
+            });
         }).catch(function() {
             // something bad happened
             console.log("Error in post animal to db");
@@ -81,12 +80,11 @@ router.route('/animal')
         // getting all
         db.connect().then(function(value) {
             // querying for all the animals
-            db.selectAll("ANIMAL", function(result) {
+            db.selectAll("ANIMAL", function(data) {
                 // converting to json
+                res.send(data);
+                db.close();
             });
-        }).then(function() {
-            // closing db
-            db.close();
         }).catch(function() {
             // error handling
             console.log("Error connecting to db");
@@ -122,21 +120,17 @@ router.route('/type')
     // create a bear (accessed at POST http://localhost:8080/type)
     .post(function(req, res) {
         // creating an type
-        var type = new type(
-            req.body.name,
-            req.body.date,
-            req.body.genre,
-            req.body.race,
-            req.body.owner
+        var type = new Type(
+            req.body.type,
         );
 
         // creating connection to db
         db.connect().then(function(value) {
             // performing insert
-            db.insert("type", type.toarray());
-        }).then(function(value) {
-            // closing connection to db
-            db.close();
+            db.insert("vet_types", type.toarray(), function(data) {
+                res.send(data)
+                db.close();
+            });
         }).catch(function() {
             // something bad happened
             console.log("Error in post type to db");
@@ -149,12 +143,10 @@ router.route('/type')
         // getting all
         db.connect().then(function(value) {
             // querying for all the types
-            db.selectAll("type", function(result) {
-                // converting to json
+            db.selectAll("vet_types", function(data) {
+                db.close()
+                res.send(data);
             });
-        }).then(function() {
-            // closing db
-            db.close();
         }).catch(function() {
             // error handling
             console.log("Error connecting to db");

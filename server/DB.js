@@ -33,7 +33,9 @@ Query.prototype.execute = function(callback) {
                 this.dbConnection.release(function(err) {
                     if (err) {
                         // error even while trying to close db
-                        throw new Error("error while closing connection");
+                        if (callback) {
+                            callback({status: "notok", message: "errore while closing connection"});
+                        }
                     }
                 });
             } else {
@@ -41,12 +43,14 @@ Query.prototype.execute = function(callback) {
                 this.dbConnection.release(function(err) {
                     if (err) {
                         // error even while trying to close db
-                        throw new Error("error while closing connection");
+                        if (callback) {
+                            callback({status: "notok", message: "errore while closing connection"});
+                        }
                     }
                 });
                 // sending values to callback
                 if (callback) {
-                    callback(result);
+                    callback({status: "ok", message: result});
                 }
             }
         });
@@ -118,17 +122,17 @@ DB.prototype.execute = function(command, callback) {
                 callback("ERROR", err);
             } else {
                 if (callback) {
-                    callback(result);
+                    callback({status: "ok", message: result});
                 }
             }
         });
     } else {
-        callback("no connection to db");
+        callback({status: "notok", message: "no connection to db"});
     }
 }
 
 // insert
-DB.prototype.insert = function(tablename, params) {
+DB.prototype.insert = function(tablename, params, callback) {
     if (this.connection) {
         var query = "INSERT INTO " + tablename + " VALUES ("
         for (var i in params) {
@@ -137,11 +141,11 @@ DB.prototype.insert = function(tablename, params) {
         query = query.slice(0, query.length-2) + ")";
         this.connection.execute(query, params, function(err, result) {
             if (callback) {
-                callback(result);
+                callback({status: "ok", message: result});
             }
         });
     } else {
-        callback("no connection to db");
+        callback({status: "notok", message: "no connection to db"});
     }
 };
 
@@ -158,7 +162,7 @@ DB.prototype.select = function(tablename, fields) {
         // returning created query
         return query;
     } else {
-        callback("no connection to db");
+        callback({status: "notok", message: "no connection to db"});
     }
 };
 
@@ -167,11 +171,11 @@ DB.prototype.selectAll = function(tablename, callback) {
     if (this.connection) {
         this.connection.execute("SELECT * FROM " + tablename, function(err, result) {
             if (callback) {
-                callback(result);
+                callback({status: "ok", message: result});
             }
         });
     } else {
-        callback("no connection to db");
+        callback({status: "notok", message: "no connection to db"});
     }
 };
 

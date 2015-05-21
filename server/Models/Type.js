@@ -25,20 +25,26 @@ db.connect().then(function(value) {
 
     console.log("about to create table vet_types");
     db.execute(query, function(result, err) {
-        console.log(result);
-        console.log(err);
+
+        if (err) {
+            console.log(err);
+            db.close();
+            return;
+        }
 
         query = "CREATE TABLE vet_types (";
         query += "type varchar2(20) NOT NULL, ";
         query += "CONSTRAINT vet_types_pk PRIMARY KEY (type))"
 
         db.execute(query, function(result, err) {
-            console.log(result);
-            console.log(err);
+            if (err) {
+                console.log(err);
+                db.close();
+                return;
+            }
             // closing db
             db.close();
         });
-        //query += "COMMIT;";
     });
 });
 
