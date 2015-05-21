@@ -99,8 +99,8 @@ DB.prototype.connect = function() {
 
 // releasing connection to database
 DB.prototype.close = function() {
-    if (self.connection) {
-        self.connection.release(function(err) {
+    if (this.connection) {
+        this.connection.release(function(err) {
             if (err) {
                 throw new Error("error while closing connection");
             }
