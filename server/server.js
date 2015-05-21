@@ -146,7 +146,7 @@ router.route('/type')
         // getting all
         db.connect().then(function(value) {
             // querying for all the types
-            db.selectAll("vet_types", function(data) {
+            db.selectAll("OEHR_EMPLOYEES", function(data) {
                 db.close()
                 res.send(data);
             });
