@@ -12,5 +12,9 @@ Type.prototype.tojson = function() {
     return JSON.stringify(this);
 };
 
+Type.prototype.toarray = function() {
+    return [this.type];
+}
+
 // exporting type module
 module.exports = Type;

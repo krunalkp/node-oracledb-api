@@ -22,5 +22,10 @@ Animal.prototype.tojson = function() {
     return JSON.stringify(this);
 };
 
+// converting this object to array
+Animal.prototype.toarray = function() {
+    return [this.code, this.name, this.date, this.genre, this.race, this.owner];
+}
+
 // exporting animal module
 module.exports = Animal;
