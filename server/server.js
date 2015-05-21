@@ -6,7 +6,7 @@ var express    = require('express');
 var bodyParser = require('body-parser');
 var app        = express();
 var morgan     = require('morgan');
-var OracleDB   = require("./DB");
+var OracleDB   = require("./DB").DB;
 
 var db = new OracleDB();
 
@@ -112,6 +112,54 @@ router.route('/animal/:_id')
     // delete the bear with this id
     .delete(function(req, res) {
         // rimozione 
+    });
+
+
+// on routes that end in /type
+// ----------------------------------------------------
+router.route('/type')
+
+    // create a bear (accessed at POST http://localhost:8080/type)
+    .post(function(req, res) {
+        // creating an type
+        var type = new type(
+            req.body.name,
+            req.body.date,
+            req.body.genre,
+            req.body.race,
+            req.body.owner
+        );
+
+        // creating connection to db
+        db.connect().then(function(value) {
+            // performing insert
+            db.insert("type", type.toarray());
+        }).then(function(value) {
+            // closing connection to db
+            db.close();
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post type to db");
+            res.send("Error in post type to db");
+        });
+    })
+
+    // get all the type (accessed at GET http://localhost:8080/api/type)
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(value) {
+            // querying for all the types
+            db.selectAll("type", function(result) {
+                // converting to json
+            });
+        }).then(function() {
+            // closing db
+            db.close();
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
     });
 
 

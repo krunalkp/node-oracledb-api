@@ -110,6 +110,23 @@ DB.prototype.close = function() {
     }
 };
 
+// perform command
+DB.prototype.execute = function(command, callback) {
+    if (this.connection) {
+        this.connection.execute(command, function(err, result) {
+            if (err) {
+                callback("ERROR");
+            } else {
+                if (callback) {
+                    callback(result);
+                }
+            }
+        });
+    } else {
+        callback("no connection to db");
+    }
+}
+
 // insert
 DB.prototype.insert = function(tablename, params) {
     if (this.connection) {
