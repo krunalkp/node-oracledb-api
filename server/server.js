@@ -130,9 +130,9 @@ router.route('/type')
         // creating connection to db
         db.connect().then(function(connection) {
             // performing insert
-            db.insert(connection, "vet_types", type.toarray(), function(data) {
+            db.insert(connection, "vet_types", type.toarray(), function(connection, data) {
                 res.send(data)
-                db.close();
+                db.close(connection);
             });
         }).catch(function() {
             // something bad happened
@@ -146,8 +146,8 @@ router.route('/type')
         // getting all
         db.connect().then(function(connection) {
             // querying for all the types
-            db.selectAll(connection, "vet_types", function(data) {
-                db.close()
+            db.selectAll(connection, "vet_types", function(connection, data) {
+                db.close(connection)
                 res.send(data);
             });
         }).catch(function() {

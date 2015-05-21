@@ -119,15 +119,15 @@ DB.prototype.execute = function(connection, command, callback) {
     if (this.connection) {
         connection.execute(command, function(err, result) {
             if (err) {
-                callback({status: "notok", message: err});
+                callback(connection, {status: "notok", message: err});
             } else {
                 if (callback) {
-                    callback({status: "ok", message: result});
+                    callback(connection, {status: "ok", message: result});
                 }
             }
         });
     } else {
-        callback({status: "notok", message: "no connection to db"});
+        callback(connection, {status: "notok", message: "no connection to db"});
     }
 }
 
@@ -146,16 +146,16 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
         connection.execute(query, p, {autoCommit: true}, function(err, result) {
             if (err) {
                 if (callback) {
-                    callback({status: "notok", message: err});
+                    callback(connection, {status: "notok", message: err});
                 }
             } else {
                 if (callback) {
-                    callback({status: "ok", message: result});
+                    callback(connection, {status: "ok", message: result});
                 }
             }
         });
     } else {
-        callback({status: "notok", message: "no connection to db"});
+        callback(connection, {status: "notok", message: "no connection to db"});
     }
 };
 
@@ -172,7 +172,7 @@ DB.prototype.select = function(connection, tablename, fields) {
         // returning created query
         return query;
     } else {
-        callback({status: "notok", message: "no connection to db"});
+        callback(connection, {status: "notok", message: "no connection to db"});
     }
 };
 
@@ -182,15 +182,15 @@ DB.prototype.selectAll = function(connection, tablename, callback) {
         console.log("SELECT * FROM " + tablename);
         connection.execute("SELECT * FROM " + tablename, function(err, result) {
             if (err) {
-                callback({status: "notok", message: err});
+                callback(connection, {status: "notok", message: err});
             } else {
                 if (callback) {
-                    callback({status: "ok", message: result});
+                    callback(connection, {status: "ok", message: result});
                 }
             }
         });
     } else {
-        callback({status: "notok", message: "no connection to db"});
+        callback(connection, {status: "notok", message: "no connection to db"});
     }
 };
 
