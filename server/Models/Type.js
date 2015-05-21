@@ -17,7 +17,9 @@ Type.prototype.toarray = function() {
 };
 
 // creating table inside db
-var db = require("../DB").DB;
+var OracleDB = require("../DB").DB;
+var db = new OracleDB();
+
 db.connect().then(function(value) {
     var query = "DROP TABLE vet_types;"
     query += "CREATE TABLE vet_types (type TEXT(20) NOT NULL PRIMARY KEY);";
