@@ -131,7 +131,7 @@ router.route('/type')
         db.connect().then(function(connection) {
             // performing insert
             db.insert(connection, "vet_types", type.toarray(), function(connection, data) {
-                res.send(data)
+                res.send(data);
                 db.close(connection);
             });
         }).catch(function() {
