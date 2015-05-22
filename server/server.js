@@ -66,10 +66,11 @@ router.route('/animal')
         );
 
         // creating connection to db
-        db.connect().then(function(value) {
+        db.connect().then(function(connection) {
             // performing insert
-            db.insert("ANIMAL", animal.toarray(), function() {
-                db.close();
+            db.insert(connection, "vet_animals", animal.toarray(), function(connection, data) {
+                res.send(data);
+                db.close(connection);
             });
         }).catch(function() {
             // something bad happened
@@ -81,12 +82,11 @@ router.route('/animal')
     // get all the animal (accessed at GET http://localhost:8080/api/animal)
     .get(function(req, res) {
         // getting all
-        db.connect().then(function(value) {
-            // querying for all the animals
-            db.selectAll("ANIMAL", function(data) {
-                // converting to json
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_animals", function(connection, data) {
+                db.close(connection)
                 res.send(data);
-                db.close();
             });
         }).catch(function() {
             // error handling

@@ -30,34 +30,41 @@ Animal.prototype.toarray = function() {
 // creating table inside db
 var OracleDB = require("../DB").DB;
 var db = new OracleDB();
-/*
-db.connect().then(function(value) {
+
+db.connect().then(function(connection) {
     var query = "DROP TABLE vet_animals PURGE";
 
     console.log("about to create table vet_animals");
-    db.execute(query, function(result, err) {
+    db.execute(connection, query, function(connection, result, err) {
 
         if (err) {
             console.log(err);
-            db.close();
+            db.close(connection);
             return;
         }
 
         query = "CREATE TABLE vet_animals (";
-        query += "type varchar2(20) NOT NULL, ";
-        query += "CONSTRAINT vet_animals_pk PRIMARY KEY (type))"
+        query += "code NUMBER NOT NULL, "
+        query += "name VARCHAR2(20) NOT NULL, "
+        query += "date VARCHAR2(20) NOT NULL, "
+        query += "genre VARCHAR2(20) NOT NULL, "
+        query += "race VARCHAR2(20) NOT NULL, "
+        query += "owner VARCHAR2(20) NOT NULL, "
+        query += "type VARCHAR2(20) NOT NULL, ";
+        query += "CONSTRAINT vet_animals_pk PRIMARY KEY (code))"
 
-        db.execute(query, function(result, err) {
+        db.execute(connection, query, function(connection, result, err) {
             if (err) {
                 console.log(err);
-                db.close();
+                db.close(connection);
                 return;
             }
             // closing db
-            db.close();
+            db.close(connection);
         });
     });
-});*/
+});
+
 
 // exporting animal module
 module.exports = Animal;
