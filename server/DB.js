@@ -140,7 +140,7 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
             query += ":v" + i + ", ";
             p['v'+i] = params[i];
         }
-        query = query.slice(0, query.length-2) + ");";
+        query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(p);
         connection.execute(query, p, {autoCommit: true}, function(err, result) {
