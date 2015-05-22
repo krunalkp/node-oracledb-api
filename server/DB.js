@@ -137,13 +137,18 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
         var p = {};
         var query = "insert into " + tablename + " values("
         for (var i in params) {
-            query += ":v" + i + ", ";
-            p['v'+i] = params[i];
+            //query += ":v" + i + ", ";
+            //p['v'+i] = params[i];
+            if (typeof(params[i]) == "string") {
+                query += "'" + params[i] + "', ";
+            } else {
+                query += "" + params[i] + ", ";
+            }
         }
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(p);
-        connection.execute(query, p, {autoCommit: true}, function(err, result) {
+        connection.execute(query, function(err, result) {
             if (err) {
                 if (callback) {
                     callback(connection, {status: "notok", message: err});
@@ -180,7 +185,7 @@ DB.prototype.select = function(connection, tablename, fields) {
 DB.prototype.selectAll = function(connection, tablename, callback) {
     if (this.connection) {
         console.log("select * from " + tablename);
-        connection.execute("select * from " + tablename + ";", function(err, result) {
+        connection.execute("select * from " + tablename, function(err, result) {
             if (err) {
                 callback(connection, {status: "notok", message: err});
             } else {
