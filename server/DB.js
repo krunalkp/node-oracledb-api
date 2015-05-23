@@ -8,7 +8,7 @@ function Query(value, dbConnection) {
 
 // from
 Query.prototype.from = function(tablename) {
-    this.string += " FROM "+ tablename + " ";
+    this.string += " FROM "+ tablename;
     return this;
 };
 
@@ -27,7 +27,7 @@ Query.prototype.order = function(orderby) {
 // execute
 Query.prototype.execute = function(callback) {
     if (this.dbConnection) {
-        this.dbConnection.execute( this.string, {}, function (err, result) {
+        this.dbConnection.execute( this.string, function (err, result) {
             if (err) {
                 // throwing error and closing connection
                 this.dbConnection.release(function(err) {
@@ -46,12 +46,13 @@ Query.prototype.execute = function(callback) {
                         if (callback) {
                             callback({status: "notok", message: "errore while closing connection"});
                         }
+                    } else {
+                         // sending values to callback
+                        if (callback) {
+                            callback({status: "ok", message: result});
+                        }
                     }
                 });
-                // sending values to callback
-                if (callback) {
-                    callback({status: "ok", message: result});
-                }
             }
         });
     } else {

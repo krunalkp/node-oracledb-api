@@ -200,7 +200,7 @@ router.route('/owner')
         });
     });
 
-// on routes that end in /animal/:bear_id
+// on routes that end in /owner/:bear_id
 // ----------------------------------------------------
 router.route('/owner/:_id')
 
@@ -209,8 +209,9 @@ router.route('/owner/:_id')
         // req.params._id
         // req.body.param
         db.connect().then(function(connection) {
-            var s = db.select(connection, "*").from("vet_owners").where("cf", "=", "'" + req.params._id + "'").string;
-            console.log(s);
+            db.select(connection, "*").from("vet_owners").where("cf", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
         });
     })
 
