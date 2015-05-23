@@ -166,7 +166,7 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
 };
 
 // select
-DB.prototype.select = function(connection, tablename, fields) {
+DB.prototype.select = function(connection, fields) {
     if (this.connection) {
         // creating querystring
         var queryString = "SELECT ";

@@ -158,6 +158,72 @@ router.route('/type')
         });
     });
 
+// on routes that end in /owner
+// ----------------------------------------------------
+router.route('/owner')
+
+    // create a bear (accessed at POST http://localhost:8080/owner)
+    .post(function(req, res) {
+        // creating an owner
+        var owner = new Owner(
+            req.body.name,
+            req.body.surname,
+        );
+
+        // creating connection to db
+        db.connect().then(function(connection) {
+            // performing insert
+            db.insert(connection, "vet_owners", owner.toarray(), function(connection, data) {
+                res.send(data);
+                db.close(connection);
+            });
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post owner to db");
+            res.send("Error in post owner to db");
+        });
+    })
+
+    // get all the owner (accessed at GET http://localhost:8080/api/owner)
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_owners", function(connection, data) {
+                db.close(connection)
+                res.send(data);
+            });
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
+    });
+
+// on routes that end in /animal/:bear_id
+// ----------------------------------------------------
+router.route('/animal/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_owners").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
+
+    // update the bear with this id
+    .put(function(req, res) {
+        // aggiornamento
+    })
+
+    // delete the bear with this id
+    .delete(function(req, res) {
+        // rimozione 
+    });
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
