@@ -202,14 +202,14 @@ router.route('/owner')
 
 // on routes that end in /animal/:bear_id
 // ----------------------------------------------------
-router.route('/animal/:_id')
+router.route('/owner/:_id')
 
     // get the bear with that id
     .get(function(req, res) {
         // req.params._id
         // req.body.param
         db.connect().then(function(connection) {
-            var s = db.select(connection, "*").from("vet_owners").string;
+            var s = db.select(connection, "*").from("vet_owners").where("cf", "=", "'" + req.params._id + "'").string;
             console.log(s);
         });
     })
