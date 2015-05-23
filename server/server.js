@@ -27,7 +27,7 @@ var Type = require("./Models/Type"),
     Race = require("./Models/Race"),
     Animal = require("./Models/Animal"),
     Visit = require("./Models/Visit"),
-    Operation = require("./Models/Operation"),
+    Operation = require("./Models/Operation");
 
 
 // ROUTES FOR OUR API
