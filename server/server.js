@@ -22,12 +22,13 @@ app.use(multer());
 var port     = 10000;//process.env.PORT || 8080; // set our port
 
 // getting models
-var Animal = require("./Models/Animal"),
-    Operation = require("./Models/Operation"),
+var Type = require("./Models/Type"),
     Owner = require("./Models/Owner"),
     Race = require("./Models/Race"),
-    Type = require("./Models/Type"),
-    Visit = require("./Models/Visit");
+    Animal = require("./Models/Animal"),
+    Visit = require("./Models/Visit"),
+    Operation = require("./Models/Operation"),
+
 
 // ROUTES FOR OUR API
 // =============================================================================

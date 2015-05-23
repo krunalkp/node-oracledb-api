@@ -51,7 +51,9 @@ db.connect().then(function(connection) {
         query += "race VARCHAR2(20) NOT NULL, "
         query += "owner VARCHAR2(20) NOT NULL, "
         query += "type VARCHAR2(20) NOT NULL, ";
-        query += "CONSTRAINT vet_animals_pk PRIMARY KEY (code))"
+        query += "CONSTRAINT vet_animals_pk PRIMARY KEY (code), "
+        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (owner) REFERENCES vet_owners(cf), "
+        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (race) REFERENCES vet_races(race))"
 
         db.execute(connection, query, function(connection, result, err) {
             if (err) {
