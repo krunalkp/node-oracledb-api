@@ -167,7 +167,7 @@ router.route('/owner')
         // creating an owner
         var owner = new Owner(
             req.body.name,
-            req.body.surname,
+            req.body.surname
         );
 
         // creating connection to db
