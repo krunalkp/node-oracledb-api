@@ -80,9 +80,6 @@ function createVisitOperationsTable() {
                 }
                 // closing db
                 db.close(connection);
-
-                // we now must create the vet_visits_operations table
-                createVisitOperationsTable();
             });
         });
     });
