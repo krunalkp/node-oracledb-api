@@ -52,7 +52,7 @@ db.connect().then(function(connection) {
     });
 });
 
-function creatVisitOperationsTable() {
+function createVisitOperationsTable() {
     db.connect().then(function(connection) {
         var query = "DROP TABLE vet_visit_operations PURGE";
 
