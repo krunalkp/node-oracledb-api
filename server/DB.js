@@ -26,11 +26,12 @@ Query.prototype.order = function(orderby) {
 
 // execute
 Query.prototype.execute = function(callback) {
+    var self = this;
     if (this.dbConnection) {
         this.dbConnection.execute( this.string, function (err, result) {
             if (err) {
                 // throwing error and closing connection
-                this.dbConnection.release(function(err) {
+                self.dbConnection.release(function(err) {
                     if (err) {
                         // error even while trying to close db
                         if (callback) {
@@ -40,7 +41,7 @@ Query.prototype.execute = function(callback) {
                 });
             } else {
                 // no errors, closing db and passing results to callback
-                this.dbConnection.release(function(err) {
+                self.dbConnection.release(function(err) {
                     if (err) {
                         // error even while trying to close db
                         if (callback) {
