@@ -209,9 +209,8 @@ router.route('/animal/:_id')
         // req.params._id
         // req.body.param
         db.connect().then(function(connection) {
-            db.select(connection, "*").from("vet_owners").execute(function(data) {
-                res.send(data);
-            });
+            var s = db.select(connection, "*").from("vet_owners").string;
+            console.log(s);
         });
     })
 
