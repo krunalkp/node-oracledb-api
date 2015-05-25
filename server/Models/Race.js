@@ -39,7 +39,7 @@ db.connect().then(function(connection) {
         query += "race VARCHAR2(20) NOT NULL, ";
         query += "type VARCHAR2(20) NOT NULL, ";
         query += "CONSTRAINT vet_races_pk PRIMARY KEY (race), ";
-        query += "CONTRAINT fk_vet_races FOREIGN KEY (type) REFERENCES vet_types(type))";
+        query += "CONTRAINT fk_vet_races FOREIGN KEY (type) REFERENCES vet_types(type) ON UPDATE CASCADE ON DELETE CASCADE)";
 
         db.execute(connection, query, function(connection, result, err) {
             if (err) {

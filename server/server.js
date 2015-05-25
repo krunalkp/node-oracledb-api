@@ -104,6 +104,11 @@ router.route('/animal/:_id')
     .get(function(req, res) {
         // req.params._id
         // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_animals").where("code", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
     })
 
     // update the bear with this id
@@ -210,6 +215,73 @@ router.route('/owner/:_id')
         // req.body.param
         db.connect().then(function(connection) {
             db.select(connection, "*").from("vet_owners").where("cf", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
+
+    // update the bear with this id
+    .put(function(req, res) {
+        // aggiornamento
+    })
+
+    // delete the bear with this id
+    .delete(function(req, res) {
+        // rimozione 
+    });
+
+// on routes that end in /race
+// ----------------------------------------------------
+router.route('/race')
+
+    // create a bear (accessed at POST http://localhost:8080/race)
+    .post(function(req, res) {
+        // creating an race
+        var race = new Race(
+            req.body.race,
+            req.body.type
+        );
+
+        // creating connection to db
+        db.connect().then(function(connection) {
+            // performing insert
+            db.insert(connection, "vet_races", race.toarray(), function(connection, data) {
+                res.send(data);
+                db.close(connection);
+            });
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post race to db");
+            res.send("Error in post race to db");
+        });
+    })
+
+    // get all the race (accessed at GET http://localhost:8080/api/race)
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_races", function(connection, data) {
+                db.close(connection)
+                res.send(data);
+            });
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
+    });
+
+// on routes that end in /race/:bear_id
+// ----------------------------------------------------
+router.route('/race/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_races").where("race", "=", "'" + req.params._id + "'").execute(function(data) {
                 res.send(data);
             });
         });
