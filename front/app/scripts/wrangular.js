@@ -57,12 +57,13 @@ Class("Controller", {
             // creating the controller
             var _vars = vars;
             _vars.push(this.control);
+            //console.log(_vars);
             this.module.controller(this.name, _vars);
         }
     },
 
     control: function($scope) {
-        console.log($scope);
+        //console.log($scope);
     }
 });
 

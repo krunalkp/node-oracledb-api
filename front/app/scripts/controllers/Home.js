@@ -3,17 +3,18 @@ Class("HomeController",{
         Controller.call(this, module, name, dependencies);
     },
 
-    control: function($scope, API) {
+    control: function($scope, $routeParams, API) {
         //this._control($scope);
         $scope.name = "Marco";
         $scope.names = ["marco", "michael", "giulio"];
-        API.testConnection().success(function(response) {
+        /*API.testConnection().success(function(response) {
             if (response.status) {
                 $scope.connected = "ok";
             } else {
                 $scope.connected = "not ok";
             }
-        });
+        });*/
+        console.log($routeParams)
         /*
             cosa dobbiamo mostrare?
 
@@ -33,4 +34,4 @@ Class("HomeController",{
     }
 })._extends("Controller");
 
-home = new HomeController("Veterinario.Controllers", "HomeController", ['$scope', 'API'], []);
+home = new HomeController("Veterinario.Controllers", "HomeController", ['$scope', '$routeParams', 'API'], []);

@@ -9,9 +9,13 @@
   <title>Simple Sidebar - Start Bootstrap Template</title>
   <!-- Bootstrap Core CSS-->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- sweetalert css-->
+  <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
   <!-- Custom CSS-->
   <link href="styles/simple-sidebar.css" rel="stylesheet">
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/angular/angular.min.js"></script>
   <script src="bower_components/angular-route/angular-route.min.js"></script>
   <script src="bower_components/stayclassy/classy.js"></script>
@@ -21,6 +25,12 @@
   <script src="/scripts/services/API.js"></script>
   <script src="/scripts/controllers/Home.js"></script>
   <script src="/scripts/controllers/About.js"></script>
+  <script src="/scripts/controllers/AnimaliController.js"></script>
+  <script src="/scripts/controllers/PadroniController.js"></script>
+  <script src="/scripts/controllers/VisiteController.js"></script>
+  <script src="/scripts/controllers/PadroniDetailController.js"></script>
+  <script src="/scripts/controllers/AnimaliDetailController.js"></script>
+  <script src="/scripts/controllers/VisiteDetailController.js"></script>
   <!--script(src="/scripts/test.js")-->
 </head>
 <body ng-app="Veterinario">
@@ -28,10 +38,9 @@
     <!-- Sidebar-->
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
-        <li class="sidebar-brand"><a ng-href="#/" href="#">Home</a></li>
-        <li class="sidebar-brand"><a ng-href="#/about" href="#">About</a></li>
-        <li class="sidebar-brand"><a href="#">Start Bootstrap</a></li>
-        <li class="sidebar-brand"><a href="#">Start Bootstrap</a></li>
+        <li class="sidebar-brand"><a ng-href="#/animal" href="#">Animali</a></li>
+        <li class="sidebar-brand"><a ng-href="#/owner" href="#">Padroni</a></li>
+        <li class="sidebar-brand"><a ng-href="#/visit" href="#">Visite</a></li>
       </ul>
     </div>
     <div id="page-content-wrapper">

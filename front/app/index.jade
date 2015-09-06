@@ -13,10 +13,15 @@ head
     // Bootstrap Core CSS
     link(rel='stylesheet', href='bower_components/bootstrap/dist/css/bootstrap.min.css')
 
+    // sweetalert css
+    link(rel='stylesheet', href='bower_components/sweetalert/dist/sweetalert.css')
+
     // Custom CSS
     link(href="styles/simple-sidebar.css", rel="stylesheet")
 
     script(src="bower_components/jquery/dist/jquery.min.js")
+    script(src="bower_components/sweetalert/dist/sweetalert.min.js")
+    script(src='bower_components/bootstrap/dist/js/bootstrap.min.js')
     script(src="bower_components/angular/angular.min.js")
     script(src="bower_components/angular-route/angular-route.min.js")
     script(src="bower_components/stayclassy/classy.js")
@@ -28,6 +33,12 @@ head
     script(src="/scripts/services/API.js")
     script(src="/scripts/controllers/Home.js")
     script(src="/scripts/controllers/About.js")
+    script(src="/scripts/controllers/AnimaliController.js")
+    script(src="/scripts/controllers/PadroniController.js")
+    script(src="/scripts/controllers/VisiteController.js")
+    script(src="/scripts/controllers/PadroniDetailController.js")
+    script(src="/scripts/controllers/AnimaliDetailController.js")
+    script(src="/scripts/controllers/VisiteDetailController.js")
     //script(src="/scripts/test.js")
 
 body(ng-app="Veterinario")
@@ -36,17 +47,14 @@ body(ng-app="Veterinario")
         div#sidebar-wrapper
             ul.sidebar-nav
                 li.sidebar-brand
-                    a(ng-href="#/", href="#")
-                        | Home
+                    a(ng-href="#/animal", href="#")
+                        | Animali
                 li.sidebar-brand
-                    a(ng-href="#/about", href="#")
-                        | About
+                    a(ng-href="#/owner", href="#")
+                        | Padroni
                 li.sidebar-brand
-                    a(href="#")
-                        | Start Bootstrap
-                li.sidebar-brand
-                    a(href="#")
-                        | Start Bootstrap
+                    a(ng-href="#/visit", href="#")
+                        | Visite
         div#page-content-wrapper
             div.container-fluid
                 div.row

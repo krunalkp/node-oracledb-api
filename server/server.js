@@ -114,11 +114,23 @@ router.route('/animal/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
+        db.connection().then(function(connection) {
+            db.update(connection, "vet_animals", req.body, function() {
+                db.close(connection);
+                res.send(data);
+            });
+        });
     })
 
     // delete the bear with this id
     .delete(function(req, res) {
         // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_animals", "code = " + req.params._id, function(data) {
+                db.close(connection);
+                res.send(data)
+            });
+        })
     });
 
 
@@ -223,11 +235,23 @@ router.route('/owner/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
+        db.connection().then(function(connection) {
+            db.update(connection, "vet_owners", req.body, function() {
+                db.close(connection);
+                res.send(data);
+            });
+        });
     })
 
     // delete the bear with this id
     .delete(function(req, res) {
         // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_owners", "cf = " + req.params._id, function(data) {
+                db.close(connection);
+                res.send(data);
+            });
+        })
     });
 
 // on routes that end in /race
@@ -290,12 +314,183 @@ router.route('/race/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
+        db.connection().then(function(connection) {
+            db.update(connection, "vet_races", req.body, function() {
+                db.close(connection);
+                res.send(data);
+            });
+        });
     })
 
     // delete the bear with this id
     .delete(function(req, res) {
         // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_races", "race = " + req.params._id, function(data) {
+                db.close(connection);
+                res.send(data);
+            });
+        })
     });
+
+// on routes that end in /operation
+// ----------------------------------------------------
+router.route('/operation')
+
+    // create a bear (accessed at POST http://localhost:8080/operation)
+    .post(function(req, res) {
+        // creating an operation
+        var operation = new Operation(
+            req.body.type
+        );
+
+        // creating connection to db
+        db.connect().then(function(connection) {
+            // performing insert
+            db.insert(connection, "vet_operations", operation.toarray(), function(connection, data) {
+                res.send(data);
+                db.close(connection);
+            });
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post operation to db");
+            res.send("Error in post operation to db");
+        });
+    })
+
+    // get all the operation (accessed at GET http://localhost:8080/api/operation)
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_operations", function(connection, data) {
+                db.close(connection)
+                res.send(data);
+            });
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
+    });
+
+// on routes that end in /operation/:bear_id
+// ----------------------------------------------------
+router.route('/operation/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_operations").where("type", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
+
+    // update the bear with this id
+    .put(function(req, res) {
+        // aggiornamento
+        db.connection().then(function(connection) {
+            db.update(connection, "vet_operations", req.body, function() {
+                db.close(connection);
+                res.send(data);
+            });
+        });
+    })
+
+    // delete the bear with this id
+    .delete(function(req, res) {
+        // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_operations", "type = " + req.params._id, function(data) {
+                db.close(connection);
+                res.send(data);
+            });
+        })
+    });
+
+// on routes that end in /visit
+// ----------------------------------------------------
+router.route('/visit')
+
+    // create a bear (accessed at POST http://localhost:8080/visit)
+    .post(function(req, res) {
+        // creating an visit
+        var visit = new Visit(
+            req.body.date,
+            req.body.animal,
+            req.body.notes
+        );
+
+        // creating connection to db
+        db.connect().then(function(connection) {
+            // performing insert
+            db.insert(connection, "vet_visits", visit.toarray(), function(connection, data) {
+                res.send(data);
+                db.close(connection);
+            });
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post visit to db");
+            res.send("Error in post visit to db");
+        });
+    })
+
+    // get all the visit (accessed at GET http://localhost:8080/api/visit)
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_visits", function(connection, data) {
+                db.close(connection)
+                res.send(data);
+            });
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
+    });
+
+// on routes that end in /visit/:bear_id
+// ----------------------------------------------------
+router.route('/visit/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_visits").where("code", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
+
+    // update the bear with this id
+    .put(function(req, res) {
+        // aggiornamento
+        db.connection().then(function(connection) {
+            db.update(connection, "vet_visits", req.body, function() {
+                db.close(connection);
+                res.send(data);
+            });
+        });
+    })
+
+    // delete the bear with this id
+    .delete(function(req, res) {
+        // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_visits", "code = " + req.params._id, function(data) {
+                db.close(connection);
+                res.send(data);
+            });
+        })
+    });
+
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);

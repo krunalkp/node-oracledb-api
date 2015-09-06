@@ -1,11 +1,11 @@
-Class("VisitController", {
-    VisitController: function(module, name) {
-        Controller.call(this, module, name);
+Class("VisitController",{
+    VisitController: function(module, name, dependencies) {
+        Controller.call(this, module, name, dependencies);
     },
 
-    control: function($scope) {
-
+    control: function($scope, $routeParams, API) {
+        
     }
 })._extends("Controller");
 
-var visit = new VisitController("Veterinario", "VisitController");
+home = new VisitController("Veterinario.Controllers", "VisitController", ['$scope', '$routeParams', 'API'], []);

@@ -1,0 +1,64 @@
+div.page-header
+    h1 Lista Animali
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new animal modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#animalModal") Crea Nuovo
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Nome
+            th Data
+            th Genere
+            th Razza
+            th Padrone
+            // this line is used to modify data
+            th
+    tr(ng-repeat="animal in animals", id="{{animal.code}}")
+        td
+            a(ng-href="#/animal/{{animal.code}}", href="#") {{animal.name}}
+        td {{animal.date}}
+        td {{animal.genre}}
+        td {{animal.race}}
+        td {{animal.owner}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteAnimal('{{animal.code}}')")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new animal modal
+
+div#animalModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Nuovo Animale
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="animalName") Nome
+                        input#animalName.form-control(type="text", placeholder="Inserisci un nome")
+                    div.form-group
+                        label(for="animalDate") Data
+                        input#animalDate.form-control(type="text", placeholder="Inserisci una data")
+                    div.form-group
+                        label(for="animalGenre") Genere
+                        select#animalGenre.form-control
+                            option M
+                            option F
+                    div.form-group
+                        label(for="animalRace") Razza
+                        select#animalRace.form-control
+                            option(ng-repeat="race in races", value="{{race}}") {{race}}
+                    div.form-group
+                        label(for="animalOwner") Padrone
+                        select#animalOwner.form-control
+                            option(ng-repeat="owner in owners", value="{{owner}}") {{owner}}
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newAnimal()") Save changes

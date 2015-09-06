@@ -12,12 +12,62 @@ Class("Vet", {
             templateUrl: '../views/home.html',
             controller: 'HomeController',
             controlerAs: 'homeCtrl'
-        }).when('/about', {
+        })
+        /*
+            ANIMALI
+        */
+        .when('/animal', {
             // Use the same partial views for for all languages
-            templateUrl: '../views/about.html',
-            controller: 'AboutController',
-            controlerAs: 'aboutCtrl'
-        }).otherwise({
+            templateUrl: '../views/animali.html',
+            controller: 'AnimaliController',
+            controlerAs: 'animaliCtrl'
+        })
+
+        .when('/animal/:id', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/animalidetail.html',
+            controller: 'AnimaliDetailController',
+            controlerAs: 'animaliDetailCtrl'
+        })
+
+        /*
+            PADRONI
+        */
+        .when('/owner', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/padroni.html',
+            controller: 'PadroniController',
+            controlerAs: 'padroniCtrl'
+        })
+
+        .when('/owner/:id', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/padronidetail.html',
+            controller: 'PadroniDetailController',
+            controlerAs: 'padroniDetailCtrl'
+        })
+
+        /*
+            VISITE
+        */
+        .when('/visit', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/visite.html',
+            controller: 'VisiteController',
+            controlerAs: 'visiteCtrl'
+        })
+
+        .when('/visit/:id', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/visitedetail.html',
+            controller: 'VisiteDetailController',
+            controlerAs: 'visiteDetailCtrl'
+        })
+
+        /*
+            404 NOT FOUND
+        */
+        .otherwise({
             templateUrl: '../views/404.html'
         });
     }

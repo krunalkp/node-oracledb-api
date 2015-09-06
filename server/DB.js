@@ -203,8 +203,54 @@ DB.prototype.selectAll = function(connection, tablename, callback) {
 };
 
 // update
-DB.prototype.update = function() {};
+DB.prototype.update = function(connection, tablename, fields, callback) {
+    /*
+        {
+            "name": "newvalue",
+            "cognome": "altrovalore"
 
+        }
+    */
+    if (this.connection) {
+        // creating query string
+        var queryString = "UPDATE " + tablename + " SET ";
+        for (var k in fields) {
+            queryString += "" + k + " = " + fields[k] + ", ";
+        }
+        queryString = queryString.slice(0, queryString.length-2);
+        connection.execute(queryString, function(err, result) {
+            if (err) {
+                callback(connection, {status: "notok", message: err});
+            } else {
+                if (callback) {
+                    callback(connection, {status: "ok", message: result});
+                }
+            }
+        });
+    } else {
+        callback(connection, {status: "notok", message: "no connection to db"});
+    }
+};
 
+// delete
+DB.prototype.delete = function(connection, tablename, condition, callback) {
+    if (this.connection) {
+        // creating query string
+        var queryString = "DELETE FROM " + tablename + " WHERE " + condition;
+        connection.execute(queryString, function(err, result) {
+            if (err) {
+                callback(connection, {status: "notok", message: err});
+            } else {
+                if (callback) {
+                    callback(connection, {status: "ok", message: result});
+                }
+            }
+        });
+    } else {
+        callback(connection, {status: "notok", message: "no connection to db"});
+    }
+}
+
+module.exports.test = DB.prototype.update;
 module.exports.DB = DB;
 module.exports.Query = Query;
