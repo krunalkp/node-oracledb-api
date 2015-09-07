@@ -151,17 +151,22 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
         query = query.slice(0, query.length-2) + ")";
         console.log(query);
         console.log(p);
-        connection.execute(query, params, {autoCommit: true, isAutoCommit: true}, function(err, result) {
-            if (err) {
-                if (callback) {
-                    callback(connection, {status: "notok", message: err});
+        try {
+            connection.execute(query, params, {autoCommit: true, isAutoCommit: true}, function(err, result) {
+                if (err) {
+                    if (callback) {
+                        callback(connection, {status: "notok", message: err});
+                    }
+                } else {
+                    if (callback) {
+                        callback(connection, {status: "ok", message: result});
+                    }
                 }
-            } else {
-                if (callback) {
-                    callback(connection, {status: "ok", message: result});
-                }
-            }
-        });
+            });
+        } catch(e) {
+            console.log("errore nell'inserimento in " + tablename);
+            console.log(e);
+        }
     } else {
         callback(connection, {status: "notok", message: "no connection to db"});
     }
