@@ -14,13 +14,13 @@ table.table.table-bordered(data-height="300")
             th Cognome
             // this line is used to modify data
             th
-    tr(ng-repeat="owner in owners", id="{{owner.cf}}")
+    tr(ng-repeat="owner in owners", id="{{owner[0]}}")
         td
-            a(ng-href="#/owner/{{owner.cf}}", href="#") {{owner.cf}}
-        td {{owner.name}}
-        td {{owner.surname}}
+            a(ng-href="#/owner/{{owner[0]}}", href="#") {{owner[0]}}
+        td {{owner[1]}}
+        td {{owner[2]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteOwner('{{owner.code}}')")
+            button.btn.btn-default.btn-xs(ng-click="deleteOwner(this);")
                 span.glyphicon.glyphicon-remove
             button.btn.btn-default.btn-xs
                 span.glyphicon.glyphicon-pencil
@@ -41,7 +41,7 @@ div#ownerModal.modal.fade(tabindex="-1", role="dialog")
                         input#ownerName.form-control(type="text", placeholder="Inserisci un nome")
                     div.form-group
                         label(for="ownerSurname") Cognome
-                        input#ownerDate.form-control(type="text", placeholder="Inserisci un cognome")
+                        input#ownerSurname.form-control(type="text", placeholder="Inserisci un cognome")
             div.modal-footer
                 button.btn.btn-default(type="button", data-dismiss="modal") Close 
                 button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newOwner()") Save changes

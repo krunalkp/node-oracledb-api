@@ -3,7 +3,7 @@ Class("AnimaliDetailController",{
         Controller.call(this, module, name, dependencies);
     },
 
-    control: function($scope, $routeParams, API) {
+    control: function($scope, $route, $routeParams, API) {
         // we are inside animali detail controller
         // we need animalid
         var animalId = $routeParams.id;
@@ -16,23 +16,23 @@ Class("AnimaliDetailController",{
         $scope.race = "";
         $scope.code = "";
         API.getAnimal(animalId).then(function(response) {
-            if (response.status == "ok") {
+            if (response.data.status == "ok") {
                 // retrieving animal informations
-                $scope.name = response.message.name;
-                $scope.date = response.message.date;
-                $scope.genre = response.message.genre;
-                $scope.owner = response.message.owner;
-                $scope.race = response.message.race;
-                $scope.code = response.message.code;
+                $scope.name = response.data.message.name;
+                $scope.date = response.data.message.date;
+                $scope.genre = response.data.message.genre;
+                $scope.owner = response.data.message.owner;
+                $scope.race = response.data.message.race;
+                $scope.code = response.data.message.code;
 
                 // recuperare i dati del padrone. uso il codice fiscale in $scope.owner per recuperare il padrone
                 $scope.animalOwner = {};
                 API.getOwner($scope.owner).then(function(response) {
-                    if (response.status == "ok") {
+                    if (response.data.status == "ok") {
                         $scope.animalOwner = {
-                            name: response.message.name,
-                            surname: response.message.surname,
-                            cf: response.message.cf
+                            name: response.data.message.name,
+                            surname: response.data.message.surname,
+                            cf: response.data.message.cf
                         }
                     } else {
                         $scope.animalOwner = {
@@ -52,10 +52,10 @@ Class("AnimaliDetailController",{
                 // recupero informazioni su operazioni di questo animale
                 $scope.visits = [];
                 API.getVisitsById($scope.code).then(function(response) {
-                    if (response.status == "ok") {
-                        $response.visits = response.message;
+                    if (response.data.status == "ok") {
+                        $scope.visits = response.data.message;
                     } else {
-                        $response.visit = [{
+                        $scope.visits = [{
                             date: "",
                             notes: "Could not find any visit for this animal",
                             animal: "",
@@ -63,7 +63,7 @@ Class("AnimaliDetailController",{
                         }];
                     }
                 }, function(error) {
-                    $response.visit = [{
+                    $scope.visits = [{
                         date: "",
                         notes: "Error while retrieving visits for this animal",
                         animal: "",
@@ -89,17 +89,17 @@ Class("AnimaliDetailController",{
             var genre = $('#animalGenre').val();
             var race = $('#animalRace').val();
             var owner = $('#animalOwner').val();
-            API.newAnimal(name, date, genre, race, owner).then(function(response) {
-                if (response.status == "ok") {
+            API.setAnimal(animalId, name, date, genre, race, owner).then(function(response) {
+                if (response.data.status == "ok") {
                     // showing success dialog
-                    swal("Success!", "A new animal has been created.", "success");
+                    swal("Success!", "THe animal has been modified.", "success");
                     // reloading the current view
                     $route.reload();
                 } else {
-                    swal("Error!", "Something went wrong while creating new animal", "error");
+                    swal("Error!", "Something went wrong while modifying animal", "error");
                 }
             }, function(error) {
-                swal("Error! (bad request)", "Something went wrong while creating new animal", "error");
+                swal("Error! (bad request)", "Something went wrong while modifying animal", "error");
             });
         }
     }

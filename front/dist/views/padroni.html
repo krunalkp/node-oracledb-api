@@ -18,12 +18,12 @@
       <th></th>
     </tr>
   </thead>
-  <tr ng-repeat="owner in owners" id="{{owner.cf}}">
-    <td><a ng-href="#/owner/{{owner.cf}}" href="#">{{owner.cf}}</a></td>
-    <td>{{owner.name}}</td>
-    <td>{{owner.surname}}</td>
+  <tr ng-repeat="owner in owners" id="{{owner[0]}}">
+    <td><a ng-href="#/owner/{{owner[0]}}" href="#">{{owner[0]}}</a></td>
+    <td>{{owner[1]}}</td>
+    <td>{{owner[2]}}</td>
     <td>
-      <button ng-click="deleteOwner('{{owner.code}}')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+      <button ng-click="deleteOwner(this);" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
       <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
     </td>
   </tr>
@@ -44,7 +44,7 @@
           </div>
           <div class="form-group">
             <label for="ownerSurname">Cognome</label>
-            <input id="ownerDate" type="text" placeholder="Inserisci un cognome" class="form-control"/>
+            <input id="ownerSurname" type="text" placeholder="Inserisci un cognome" class="form-control"/>
           </div>
         </form>
       </div>

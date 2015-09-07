@@ -16,15 +16,15 @@ table.table.table-bordered(data-height="300")
             th Padrone
             // this line is used to modify data
             th
-    tr(ng-repeat="animal in animals", id="{{animal.code}}")
+    tr(ng-repeat="animal in animals", id="{{animal[5]}}")
         td
-            a(ng-href="#/animal/{{animal.code}}", href="#") {{animal.name}}
-        td {{animal.date}}
-        td {{animal.genre}}
-        td {{animal.race}}
-        td {{animal.owner}}
+            a(ng-href="#/animal/{{animal[5]}}", href="#") {{animal[0]}}
+        td {{animal[1]}}
+        td {{animal[2]}}
+        td {{animal[3]}}
+        td {{animal[4]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteAnimal('{{animal.code}}')")
+            button.btn.btn-default.btn-xs(ng-click="deleteAnimal(this)")
                 span.glyphicon.glyphicon-remove
             button.btn.btn-default.btn-xs
                 span.glyphicon.glyphicon-pencil

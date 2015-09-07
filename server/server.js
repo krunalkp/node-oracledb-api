@@ -511,6 +511,21 @@ router.route('/visitby/:_id')
         });
     })
 
+// on routes that end in /visit/:bear_id
+// ----------------------------------------------------
+router.route('/animalby/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_animals").where("owner", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
+
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);
 

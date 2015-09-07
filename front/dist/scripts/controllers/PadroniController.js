@@ -8,8 +8,9 @@ Class("PadroniController",{
         $scope.owners = [];
 
         API.getAllOwners().then(function(response) {
-            if (response.status == "ok") {
-                $scope.owners = response.message;
+            if (response.data.status == "ok") {
+                console.log(response.data);
+                $scope.owners = response.data.message.rows;
             } else {
                 // we didn't retrieve owners, using empty list.
                 $scope.owners = [{
@@ -35,7 +36,8 @@ Class("PadroniController",{
             var surname = $('#ownerSurname').val();
 
             API.newOwner(name, surname).then(function(response) {
-                if (response.status == "ok") {
+                console.log(response);
+                if (response.data.status == "ok") {
                     // showing success dialog
                     swal("Success!", "A new owner has been created.", "success");
                     // reloading the current view
@@ -50,9 +52,10 @@ Class("PadroniController",{
         };
 
         // deleting animal
-        $scope.deleteOwner = function(ownerId) {
+        $scope.deleteOwner = function(data) {
+            var ownerId = data.owner[0];
             API.deleteOwner(ownerId).then(function(response) {
-                if (response.status == "ok") {
+                if (response.data.status == "ok") {
                     // we managed to destroy this owner
                     swal("Success!", "owner deleted", "success");
                     // reloading the current view
@@ -67,4 +70,4 @@ Class("PadroniController",{
     }
 })._extends("Controller");
 
-animali = new PadroniController("Veterinario.Controllers", "PadroniController", ['$scope', '$route', '$routeParams', 'API'], []);
+owners = new PadroniController("Veterinario.Controllers", "PadroniController", ['$scope', '$route', '$routeParams', 'API'], []);

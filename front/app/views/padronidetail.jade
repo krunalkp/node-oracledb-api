@@ -1,1 +1,64 @@
-h1 Dettaglio Padrone
+div.page-header
+    h1 Dettaglio Padrone
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-6
+        // this button should trigger the new owner modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#ownerModal") Modifica
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th CF
+            th Nome
+            th Cognome
+
+    tr(id="{{cf}}")
+        td {{name}}
+        td {{surname}}
+div.row(style="margin-bottom: 20px;")
+    h3 Elenco Animali
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Nome
+            th Data
+            th Genere
+            th Razza
+            th Padrone
+            // this line is used to modify data
+            th
+    tr(ng-repeat="animal in animals", id="{{animal[5]}}")
+        td
+            a(ng-href="#/animal/{{animal[5]}}", href="#") {{animal[0]}}
+        td {{animal[1]}}
+        td {{animal[2]}}
+        td {{animal[3]}}
+        td {{animal[4]}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteAnimal(this)")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new animal modal
+
+div#ownerModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Modifica Padrone
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="ownerName") Nome
+                        input#ownerName.form-control(type="text", placeholder="Inserisci un nome", value="{{name}}")
+                    div.form-group
+                        label(for="ownerSurname") Cognome
+                        input#ownerSurname.form-control(type="text", placeholder="Inserisci un cognome", value="{{surname}}")
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="modifyOwner()") Save changes

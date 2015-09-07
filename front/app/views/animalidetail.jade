@@ -32,18 +32,14 @@ div.row(style="margin-bottom: 20px;")
 table.table.table-bordered(data-height="300")
     thead
         tr
+            th CF
             th Nome
-            th Data
-            th Genere
-            th Razza
-            th Padrone
+            th Cognome
 
-    tr(id="{{code}}")
-        td {{name}}
-        td {{date}}
-        td {{genre}}
-        td {{race}}
-        td {{owner}}
+    tr(id="{{animalOwner.cf}}")
+        td {{animalOwner.cf}}
+        td {{animalOwner.name}}
+        td {{animalOwner.surname}}
 
 div.row(style="margin-bottom: 20px;")
     h3 Visite Sostenute

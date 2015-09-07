@@ -20,14 +20,14 @@
       <th></th>
     </tr>
   </thead>
-  <tr ng-repeat="animal in animals" id="{{animal.code}}">
-    <td><a ng-href="#/animal/{{animal.code}}" href="#">{{animal.name}}</a></td>
-    <td>{{animal.date}}</td>
-    <td>{{animal.genre}}</td>
-    <td>{{animal.race}}</td>
-    <td>{{animal.owner}}</td>
+  <tr ng-repeat="animal in animals" id="{{animal[5]}}">
+    <td><a ng-href="#/animal/{{animal[5]}}" href="#">{{animal[0]}}</a></td>
+    <td>{{animal[1]}}</td>
+    <td>{{animal[2]}}</td>
+    <td>{{animal[3]}}</td>
+    <td>{{animal[4]}}</td>
     <td>
-      <button ng-click="deleteAnimal('{{animal.code}}')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+      <button ng-click="deleteAnimal(this)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
       <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
     </td>
   </tr>

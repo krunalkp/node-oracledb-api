@@ -1,7 +1,7 @@
 new Service("Veterinario.Services", "API", "http", function($http) {
 
     var API = {};
-    var BASE_URL = "http://10.13.246.169:10000/api"
+    var BASE_URL = "http://192.168.0.108:10000/api";//"http://10.13.246.169:10000/api"
 
     API.testConnection = function() {
         return $http({
@@ -21,9 +21,15 @@ new Service("Veterinario.Services", "API", "http", function($http) {
 
     API.getAnimal = function(animalId) {
         // get animalId animal
-        var url = BASE_URL + "/animal/" + animalId
+        var url = BASE_URL + "/animal/" + animalId;
         return $http.get(url);
     };
+
+    API.getAnimalById = function(ownerId) {
+        // get all the animals with this ownerid
+        var url = BASE_URL + "/animalby/" + ownerId;
+        return $http.get(url);
+    }
 
     API.newAnimal = function(name, date, race, genre, owner) {
         // creating a new animal
