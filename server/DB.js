@@ -243,7 +243,7 @@ DB.prototype.update = function(connection, tablename, fields, callback) {
 DB.prototype.delete = function(connection, tablename, condition, callback) {
     if (this.connection) {
         // creating query string
-        var queryString = "DELETE FROM " + tablename + " WHERE " + condition;
+        var queryString = "DELETE * FROM " + tablename + " WHERE " + condition;
         console.log(queryString);
         connection.execute(queryString, function(err, result) {
             if (err) {
