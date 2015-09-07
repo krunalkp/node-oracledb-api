@@ -29,6 +29,19 @@ var Type = require("./Models/Type"),
     Visit = require("./Models/Visit"),
     Operation = require("./Models/Operation");
 
+Type.create(db, function() {
+    Owner.create(db, function() {
+        Race.create(db, function() {
+            Animal.create(db, function() {
+                Visit.create(db, function() {
+                    Operation.create(db, function(){
+                        console.log("db created");
+                    });
+                });
+            });
+        });
+    });
+});
 
 // ROUTES FOR OUR API
 // =============================================================================

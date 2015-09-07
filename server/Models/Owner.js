@@ -24,38 +24,40 @@ Owner.prototype.toarray = function() {
 }
 
 // creating table inside db
-var OracleDB = require("../DB").DB;
-var db = new OracleDB();
+//var OracleDB = require("../DB").DB;
+//var db = new OracleDB();
+Owner.create = function(db, callback) {
+    db.connect().then(function(connection) {
+        var query = "DROP TABLE vet_owners PURGE";
 
-db.connect().then(function(connection) {
-    var query = "DROP TABLE vet_owners PURGE";
-
-    console.log("about to create table vet_owners");
-    db.execute(connection, query, function(connection, result, err) {
-
-        if (err) {
-            console.log(err);
-            db.close(connection);
-            return;
-        }
-
-        query = "CREATE TABLE vet_owners (";
-        query += "cf VARCHAR2(20) NOT NULL, ";
-        query += "name VARCHAR2(20) NOT NULL, ";
-        query += "surname VARCHAR2(20) NOT NULL, ";
-        query += "CONSTRAINT vet_owners_pk PRIMARY KEY (cf))"
-
+        console.log("about to create table vet_owners");
         db.execute(connection, query, function(connection, result, err) {
+
             if (err) {
                 console.log(err);
                 db.close(connection);
                 return;
             }
-            // closing db
-            db.close(connection);
+
+            query = "CREATE TABLE vet_owners (";
+            query += "cf VARCHAR2(20) NOT NULL, ";
+            query += "name VARCHAR2(20) NOT NULL, ";
+            query += "surname VARCHAR2(20) NOT NULL, ";
+            query += "CONSTRAINT vet_owners_pk PRIMARY KEY (cf))"
+
+            db.execute(connection, query, function(connection, result, err) {
+                if (err) {
+                    console.log(err);
+                    db.close(connection);
+                    return;
+                }
+                // closing db
+                db.close(connection);
+                callback();
+            });
         });
     });
-});
+}
 
 
 // exporting owner module

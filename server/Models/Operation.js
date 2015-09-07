@@ -18,45 +18,49 @@ Operation.prototype.toarray = function() {
 }
 
 // creating table inside db
-var OracleDB = require("../DB").DB;
-var db = new OracleDB();
+//var OracleDB = require("../DB").DB;
+//var db = new OracleDB();
 
-db.connect().then(function(connection) {
-    var query = "DROP TABLE vet_operations PURGE";
+Operation.create = function(db, callback) {
 
-    console.log("about to create table vet_operations");
-    db.execute(connection, query, function(connection, result, err) {
+    function createVisitOperationsTable() {
+        db.connect().then(function(connection) {
+            var query = "DROP TABLE vet_visit_operations PURGE";
 
-        if (err) {
-            console.log(err);
-            db.close(connection);
-            return;
-        }
+            console.log("about to create table vet_visit_operations");
+            db.execute(connection, query, function(connection, result, err) {
 
-        query = "CREATE TABLE vet_operations (";
-        query += "type VARCHAR2(20) NOT NULL, ";
-        query += "CONSTRAINT vet_operations_pk PRIMARY KEY (type))"
+                if (err) {
+                    console.log(err);
+                    db.close(connection);
+                    return;
+                }
 
-        db.execute(connection, query, function(connection, result, err) {
-            if (err) {
-                console.log(err);
-                db.close(connection);
-                return;
-            }
-            // closing db
-            db.close(connection);
+                query = "CREATE TABLE vet_visit_operations (";
+                query += "visit VARCHAR2(20) NOT NULL, ";
+                query += "operation VARCHAR2(20) NOT NULL, ";
+                query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (visit) REFERENCES vet_visits(code) ON DELETE CASCADE, "
+                query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (operation) REFERENCES vet_operations(type) ON DELETE CASCADE, "
+                query += "CONSTRAINT vet_visit_operations_pk PRIMARY KEY (visit, operation))"
 
-            // we now must create the vet_visits_operations table
-            createVisitOperationsTable();
+                db.execute(connection, query, function(connection, result, err) {
+                    if (err) {
+                        console.log(err);
+                        db.close(connection);
+                        return;
+                    }
+                    // closing db
+                    db.close(connection);
+                    callback();
+                });
+            });
         });
-    });
-});
+    }
 
-function createVisitOperationsTable() {
     db.connect().then(function(connection) {
-        var query = "DROP TABLE vet_visit_operations PURGE";
+        var query = "DROP TABLE vet_operations PURGE";
 
-        console.log("about to create table vet_visit_operations");
+        console.log("about to create table vet_operations");
         db.execute(connection, query, function(connection, result, err) {
 
             if (err) {
@@ -65,12 +69,9 @@ function createVisitOperationsTable() {
                 return;
             }
 
-            query = "CREATE TABLE vet_visit_operations (";
-            query += "visit VARCHAR2(20) NOT NULL, ";
-            query += "operation VARCHAR2(20) NOT NULL, ";
-            query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (visit) REFERENCES vet_visits(code) ON DELETE CASCADE, "
-            query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (operation) REFERENCES vet_operations(type) ON DELETE CASCADE, "
-            query += "CONSTRAINT vet_visit_operations_pk PRIMARY KEY (visit, operation))"
+            query = "CREATE TABLE vet_operations (";
+            query += "type VARCHAR2(20) NOT NULL, ";
+            query += "CONSTRAINT vet_operations_pk PRIMARY KEY (type))"
 
             db.execute(connection, query, function(connection, result, err) {
                 if (err) {
@@ -80,6 +81,9 @@ function createVisitOperationsTable() {
                 }
                 // closing db
                 db.close(connection);
+
+                // we now must create the vet_visits_operations table
+                createVisitOperationsTable();
             });
         });
     });
