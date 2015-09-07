@@ -34,18 +34,18 @@ db.connect().then(function(connection) {
             db.close(connection);
             return;
         }
-
+/*
         query = "CREATE TABLE vet_races (";
         query += "race VARCHAR2(20) NOT NULL, ";
         query += "type VARCHAR2(20) NOT NULL, ";
         query += "CONSTRAINT vet_races_pk PRIMARY KEY (race), ";
         query += "CONSTRAINT fk_vet_races FOREIGN KEY (type) REFERENCES vet_types(type) ON DELETE CASCADE)";
-
-            /*
+*/
+            
         query = "CREATE TABLE vet_races(";
         query += "race VARCHAR2(20) PRIMARY KEY, ";
-        query += "type VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_races REFERENCES vet_types(type) ON UPDATE CASCADE ON DELETE CASCADE)";
-*/
+        query += "type VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_races REFERENCES vet_types(type) ON DELETE CASCADE)";
+
         console.log(query);
 
         db.execute(connection, query, function(connection, result, err) {
