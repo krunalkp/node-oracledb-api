@@ -28,7 +28,7 @@ Class("AnimaliController",{
                 genre: "CONNECTING",
                 race: "TO",
                 owner: "SERVER",
-                code: "CIAO"
+                code: "CIAO" // @TODO remove this codes, we don't need this.
             }];
         });
 

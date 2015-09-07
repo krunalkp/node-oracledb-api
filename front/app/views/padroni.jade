@@ -1,1 +1,47 @@
-h1 Lista Padroni
+div.page-header
+    h1 Lista Padroni
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new owner modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#ownerModal") Crea Nuovo
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th CF
+            th Nome
+            th Cognome
+            // this line is used to modify data
+            th
+    tr(ng-repeat="owner in owners", id="{{owner.cf}}")
+        td
+            a(ng-href="#/owner/{{owner.cf}}", href="#") {{owner.cf}}
+        td {{owner.name}}
+        td {{owner.surname}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteOwner('{{owner.code}}')")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new owner modal
+
+div#ownerModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Nuovo Padrone
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="ownerName") Nome
+                        input#ownerName.form-control(type="text", placeholder="Inserisci un nome")
+                    div.form-group
+                        label(for="ownerSurname") Cognome
+                        input#ownerDate.form-control(type="text", placeholder="Inserisci un cognome")
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newOwner()") Save changes

@@ -1,2 +1,114 @@
 
-<h1>Dettaglio Animale</h1>
+<div class="page-header">
+  <h1>Dettaglio Animale</h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-6">
+    <!-- this button should trigger the new animal modal-->
+    <button type="button" data-toggle="modal" data-target="#animalModal" class="btn btn-default">Modifica</button>
+  </div>
+  <div class="col-lg-6">
+    <!-- this button should open the owner page-->
+    <button type="button" class="btn btn-default"><a ng-href="#/owner/{{owner}}" href="#">Dati Padrone</a></button>
+  </div>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Genere</th>
+      <th>Razza</th>
+      <th>Padrone</th>
+    </tr>
+  </thead>
+  <tr id="{{code}}">
+    <td>{{name}}</td>
+    <td>{{date}}</td>
+    <td>{{genre}}</td>
+    <td>{{race}}</td>
+    <td>{{owner}}</td>
+  </tr>
+</table>
+<div style="margin-bottom: 20px;" class="row">
+  <h3>Dettaglio Padrone</h3>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Genere</th>
+      <th>Razza</th>
+      <th>Padrone</th>
+    </tr>
+  </thead>
+  <tr id="{{code}}">
+    <td>{{name}}</td>
+    <td>{{date}}</td>
+    <td>{{genre}}</td>
+    <td>{{race}}</td>
+    <td>{{owner}}</td>
+  </tr>
+</table>
+<div style="margin-bottom: 20px;" class="row">
+  <h3>Visite Sostenute</h3>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="visit in visits" id="{{visit.code}}">
+    <td><a ng-href="#/visit/{{visit.code}}" href="#">{{visit.date}}</a></td>
+    <td>{{visit.notes}}</td>
+  </tr>
+</table>
+<!-- new animal modal-->
+<div id="animalModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nuovo Animale</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="animalName">Nome</label>
+            <input id="animalName" type="text" placeholder="Inserisci un nome" value="{{name}}" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="animalDate">Data</label>
+            <input id="animalDate" type="text" placeholder="Inserisci una data" value="{{date}}" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="animalGenre">Genere</label>
+            <select id="animalGenre" value="{{genre}}" class="form-control">
+              <option>M</option>
+              <option>F</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="animalRace">Razza</label>
+            <select id="animalRace" class="form-control">
+              <option ng-repeat="race in races" value="{{race}}">{{race}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="animalOwner">Padrone</label>
+            <select id="animalOwner" class="form-control">
+              <option ng-repeat="owner in owners" value="{{owner}}">{{owner}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close </button>
+        <button type="button" data-dismiss="modal" ng-click="modifyAnimal()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

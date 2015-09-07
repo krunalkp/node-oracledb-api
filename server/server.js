@@ -39,8 +39,10 @@ var router = express.Router();
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    //res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     console.log('Something is happening.');
     console.log(req.body);
     next();
@@ -491,6 +493,20 @@ router.route('/visit/:_id')
         })
     });
 
+// on routes that end in /visit/:bear_id
+// ----------------------------------------------------
+router.route('/visitby/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_visits").where("animal", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    })
 
 // REGISTER OUR ROUTES -------------------------------
 app.use('/api', router);

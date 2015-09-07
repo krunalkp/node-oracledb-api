@@ -1,2 +1,57 @@
 
-<h1>Lista Padroni</h1>
+<div class="page-header">
+  <h1>Lista Padroni</h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-12">
+    <!-- this button should trigger the new owner modal-->
+    <button type="button" data-toggle="modal" data-target="#ownerModal" class="btn btn-default">Crea Nuovo</button>
+  </div>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>CF</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <!-- this line is used to modify data-->
+      <th></th>
+    </tr>
+  </thead>
+  <tr ng-repeat="owner in owners" id="{{owner.cf}}">
+    <td><a ng-href="#/owner/{{owner.cf}}" href="#">{{owner.cf}}</a></td>
+    <td>{{owner.name}}</td>
+    <td>{{owner.surname}}</td>
+    <td>
+      <button ng-click="deleteOwner('{{owner.code}}')" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+    </td>
+  </tr>
+</table>
+<!-- new owner modal-->
+<div id="ownerModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nuovo Padrone</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="ownerName">Nome</label>
+            <input id="ownerName" type="text" placeholder="Inserisci un nome" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="ownerSurname">Cognome</label>
+            <input id="ownerDate" type="text" placeholder="Inserisci un cognome" class="form-control"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close </button>
+        <button type="button" data-dismiss="modal" ng-click="newOwner()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
