@@ -55,6 +55,8 @@ db.connect().then(function(connection) {
         query += "CONSTRAINT fk_vet_animals FOREIGN KEY (owner) REFERENCES vet_owners(cf) ON UPDATE CASCADE ON DELETE CASCADE, "
         query += "CONSTRAINT fk_vet_animals FOREIGN KEY (race) REFERENCES vet_races(race) ON UPDATE CASCADE ON DELETE CASCADE)"
 
+        console.log(query);
+
         db.execute(connection, query, function(connection, result, err) {
             if (err) {
                 console.log(err);
