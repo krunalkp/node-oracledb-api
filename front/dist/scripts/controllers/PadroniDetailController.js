@@ -67,6 +67,7 @@ Class("PadroniDetailController",{
                     // reloading the current view
                     $route.reload();
                 } else {
+                    console.log(response);
                     swal("Error!", "Something went wrong while modifying this owner", "error");
                 }
             }, function(error) {
