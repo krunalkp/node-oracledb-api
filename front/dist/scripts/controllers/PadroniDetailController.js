@@ -58,7 +58,7 @@ Class("PadroniDetailController",{
             var ownerId = $scope.cf;
             // trying to read form values
             var name = $('#ownerName').val();
-            var date = $('#ownerSurname').val();
+            var surname = $('#ownerSurname').val();
 
             API.setOwner(ownerId, name, surname).then(function(response) {
                 if (response.data.status == "ok") {

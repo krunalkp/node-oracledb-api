@@ -239,7 +239,7 @@ router.route('/owner/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
-        db.connection().then(function(connection) {
+        db.connect().then(function(connection) {
             db.update(connection, "vet_owners", req.body, function() {
                 db.close(connection);
                 res.send(data);
