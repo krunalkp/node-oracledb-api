@@ -4,3 +4,5 @@
 **/*.log
 **/*.zip
 server/*.log
+*.log
+*.sassc
