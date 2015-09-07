@@ -41,6 +41,8 @@ Operation.create = function(db, callback) {
                 query += "operation VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_visit_operations_2 REFERENCES vet_operations(type) ON DELETE CASCADE, ";
                 query += "CONSTRAINT vet_visit_operations_pk PRIMARY KEY (visit, operation))"
 
+                console.log(query);
+
                 db.execute(connection, query, function(connection, result, err) {
                     if (err) {
                         console.log(err);
