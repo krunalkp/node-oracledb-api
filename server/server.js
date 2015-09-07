@@ -253,6 +253,7 @@ router.route('/owner/:_id')
         db.connect().then(function(connection) {
             db.delete(connection, "vet_owners", "cf = " + req.params._id, function(data) {
                 db.close(connection);
+                console.log(data);
                 res.send(data);
             });
         })
