@@ -1,3 +1,4 @@
+
 function Visit(date, animal, notes) {
     /*
         visita
@@ -45,7 +46,7 @@ db.connect().then(function(connection) {
         query += "note VARCHAR2(20) NOT NULL, "
         query += "animal NUMBER NOT NULL, "
         query += "CONSTRAINT vet_visits_pk PRIMARY KEY (code), "
-        query += "CONSTRAINT fk_vet_visits FOREIGN KEY (animal) REFERENCES vet_animals(code) ON UPDATE CASCADE ON DELETE CASCADE)"
+        query += "CONSTRAINT fk_vet_visits FOREIGN KEY (animal) REFERENCES vet_animals(code) ON DELETE CASCADE)"
 
         db.execute(connection, query, function(connection, result, err) {
             if (err) {

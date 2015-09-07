@@ -52,8 +52,8 @@ db.connect().then(function(connection) {
         query += "owner VARCHAR2(20) NOT NULL, "
         query += "type VARCHAR2(20) NOT NULL, ";
         query += "CONSTRAINT vet_animals_pk PRIMARY KEY (code), "
-        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (owner) REFERENCES vet_owners(cf) ON UPDATE CASCADE ON DELETE CASCADE, "
-        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (race) REFERENCES vet_races(race) ON UPDATE CASCADE ON DELETE CASCADE)"
+        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (owner) REFERENCES vet_owners(cf) ON DELETE CASCADE, "
+        query += "CONSTRAINT fk_vet_animals FOREIGN KEY (race) REFERENCES vet_races(race) ON DELETE CASCADE)"
 
         console.log(query);
 
