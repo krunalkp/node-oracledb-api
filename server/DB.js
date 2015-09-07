@@ -245,7 +245,7 @@ DB.prototype.delete = function(connection, tablename, condition, callback) {
         // creating query string
         var queryString = "DELETE FROM " + tablename + " WHERE " + condition;
         console.log(queryString);
-        connection.execute(queryString, {autoCommit: true, isAutoCommit: true}, function(err, result) {
+        connection.execute(queryString, {}, {autoCommit: true, isAutoCommit: true}, function(err, result) {
             if (err) {
                 callback(connection, {status: "notok", message: err});
             } else {
