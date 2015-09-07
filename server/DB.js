@@ -154,6 +154,7 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
         try {
             connection.execute(query, params, {autoCommit: true, isAutoCommit: true}, function(err, result) {
                 if (err) {
+                    console.log("ERROR in executing insert for " + tablename);
                     if (callback) {
                         callback(connection, {status: "notok", message: err});
                     }
