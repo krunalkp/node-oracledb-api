@@ -159,6 +159,7 @@ DB.prototype.insert = function(connection, tablename, params, callback) {
                     }
                 } else {
                     if (callback) {
+                        console.log("sending to callback for  " + tablename);
                         callback(connection, {status: "ok", message: result});
                     }
                 }

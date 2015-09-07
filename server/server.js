@@ -193,6 +193,8 @@ router.route('/owner')
         db.connect().then(function(connection) {
             // performing insert
             db.insert(connection, "vet_owners", owner.toarray(), function(connection, data) {
+                console.log("data received");
+                console.log(data);
                 res.send(data);
                 db.close(connection);
             });
