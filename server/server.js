@@ -521,6 +521,7 @@ router.route('/animalby/:_id')
         // req.body.param
         db.connect().then(function(connection) {
             db.select(connection, "*").from("vet_animals").where("owner", "=", "'" + req.params._id + "'").execute(function(data) {
+                console.log(arguments);
                 res.send(data);
             });
         });

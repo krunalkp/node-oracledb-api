@@ -28,6 +28,7 @@ Query.prototype.order = function(orderby) {
 Query.prototype.execute = function(callback) {
     var self = this;
     if (this.dbConnection) {
+        console.log(this.string);
         this.dbConnection.execute( this.string, function (err, result) {
             if (err) {
                 // throwing error and closing connection
