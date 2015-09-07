@@ -240,7 +240,7 @@ router.route('/owner/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_owners", req.body, function() {
+            db.update(connection, "vet_owners", req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
