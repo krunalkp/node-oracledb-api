@@ -225,7 +225,7 @@ DB.prototype.update = function(connection, tablename, fields, callback) {
             queryString += "" + k + " = " + fields[k] + ", ";
         }
         queryString = queryString.slice(0, queryString.length-2);
-        connection.execute(queryString, function(err, result) {
+        connection.execute(queryString, {}, {autoCommit: true, isAutoCommit: true}, function(err, result) {
             if (err) {
                 callback(connection, {status: "notok", message: err});
             } else {
