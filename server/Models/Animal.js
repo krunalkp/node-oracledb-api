@@ -44,16 +44,13 @@ Animal.create = function(db, callback) {
             }
 
             query = "CREATE TABLE vet_animals (";
-            query += "code NUMBER NOT NULL, "
+            query += "code NUMBER PRIMARY KEY, "
             query += "name VARCHAR2(20) NOT NULL, "
             query += "date VARCHAR2(20) NOT NULL, "
             query += "genre VARCHAR2(20) NOT NULL, "
-            query += "race VARCHAR2(20) NOT NULL, "
-            query += "owner VARCHAR2(20) NOT NULL, "
-            query += "type VARCHAR2(20) NOT NULL, ";
-            query += "CONSTRAINT vet_animals_pk PRIMARY KEY (code), "
-            query += "CONSTRAINT fk_vet_animals FOREIGN KEY (owner) REFERENCES vet_owners(cf) ON DELETE CASCADE, "
-            query += "CONSTRAINT fk_vet_animals FOREIGN KEY (race) REFERENCES vet_races(race) ON DELETE CASCADE)"
+            query += "race VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals REFERENCES vet_races(race) ON DELETE CASCADE, "
+            query += "owner VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals REFERENCES vet_owners(cf) ON DELETE CASCADE, "
+            query += "type VARCHAR2(20) NOT NULL)";
 
             console.log(query);
 

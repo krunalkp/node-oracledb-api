@@ -42,12 +42,10 @@ Visit.create = function(db, callback) {
             }
 
             query = "CREATE TABLE vet_visits (";
-            query += "code NUMBER NOT NULL, "
+            query += "code NUMBER PRIMARY KEY, "
             query += "date VARCHAR2(20) NOT NULL, "
             query += "note VARCHAR2(20) NOT NULL, "
-            query += "animal NUMBER NOT NULL, "
-            query += "CONSTRAINT vet_visits_pk PRIMARY KEY (code), "
-            query += "CONSTRAINT fk_vet_visits FOREIGN KEY (animal) REFERENCES vet_animals(code) ON DELETE CASCADE)"
+            query += "animal NUMBER NOT NULL CONSTRAINT fk_vet_visits REFERENCES vet_animals(code) ON DELETE CASCADE)";
 
             db.execute(connection, query, function(connection, result, err) {
                 if (err) {
