@@ -56,6 +56,7 @@ Race.create = function(db, callback) {
                 }
                 // closing db
                 db.close(connection);
+                callback();
             });
         });
     });

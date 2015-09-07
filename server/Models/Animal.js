@@ -65,6 +65,7 @@ Animal.create = function(data, callback) {
                 }
                 // closing db
                 db.close(connection);
+                callback();
             });
         });
     });
