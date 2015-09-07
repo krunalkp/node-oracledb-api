@@ -41,6 +41,8 @@ db.connect().then(function(connection) {
         query += "CONSTRAINT vet_races_pk PRIMARY KEY (race), ";
         query += "CONTRAINT fk_vet_races FOREIGN KEY (type) REFERENCES vet_types(type) ON UPDATE CASCADE ON DELETE CASCADE)";
 
+        console.log(query);
+
         db.execute(connection, query, function(connection, result, err) {
             if (err) {
                 console.log(err);
@@ -54,4 +56,4 @@ db.connect().then(function(connection) {
 });
 
 // exporting race module
-module.exports = Race();
+module.exports = Race;
