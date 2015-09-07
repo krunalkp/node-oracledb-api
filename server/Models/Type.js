@@ -33,8 +33,7 @@ Type.create = function(db, callback) {
             }
 
             query = "CREATE TABLE vet_types (";
-            query += "type VARCHAR2(20) NOT NULL, ";
-            query += "CONSTRAINT vet_types_pk PRIMARY KEY (type))"
+            query += "type VARCHAR2(20) PRIMARY KEY)";
 
             db.execute(connection, query, function(connection, result, err) {
                 if (err) {

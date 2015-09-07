@@ -48,8 +48,8 @@ Animal.create = function(db, callback) {
             query += "name VARCHAR2(20) NOT NULL, "
             query += "anim_date VARCHAR2(20) NOT NULL, "
             query += "genre VARCHAR2(20) NOT NULL, "
-            query += "race VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals REFERENCES vet_races(race) ON DELETE CASCADE, "
-            query += "owner VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals REFERENCES vet_owners(cf) ON DELETE CASCADE, "
+            query += "race VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals_1 REFERENCES vet_races(race) ON DELETE CASCADE, "
+            query += "owner VARCHAR2(20) NOT NULL CONSTRAINT fk_vet_animals_2 REFERENCES vet_owners(cf) ON DELETE CASCADE, "
             query += "type VARCHAR2(20) NOT NULL)";
 
             console.log(query);

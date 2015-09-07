@@ -40,10 +40,9 @@ Owner.create = function(db, callback) {
             }
 
             query = "CREATE TABLE vet_owners (";
-            query += "cf VARCHAR2(20) NOT NULL, ";
+            query += "cf VARCHAR2(20) PRIMARY KEY, ";
             query += "name VARCHAR2(20) NOT NULL, ";
-            query += "surname VARCHAR2(20) NOT NULL, ";
-            query += "CONSTRAINT vet_owners_pk PRIMARY KEY (cf))"
+            query += "surname VARCHAR2(20) NOT NULL)";
 
             db.execute(connection, query, function(connection, result, err) {
                 if (err) {

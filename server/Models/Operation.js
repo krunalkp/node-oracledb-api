@@ -39,8 +39,8 @@ Operation.create = function(db, callback) {
                 query = "CREATE TABLE vet_visit_operations (";
                 query += "visit VARCHAR2(20) NOT NULL, ";
                 query += "operation VARCHAR2(20) NOT NULL, ";
-                query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (visit) REFERENCES vet_visits(code) ON DELETE CASCADE, "
-                query += "CONSTRAINT fk_vet_visit_operations FOREIGN KEY (operation) REFERENCES vet_operations(type) ON DELETE CASCADE, "
+                query += "CONSTRAINT fk_vet_visit_operations_1 FOREIGN KEY (visit) REFERENCES vet_visits(code) ON DELETE CASCADE, "
+                query += "CONSTRAINT fk_vet_visit_operations_2 FOREIGN KEY (operation) REFERENCES vet_operations(type) ON DELETE CASCADE, "
                 query += "CONSTRAINT vet_visit_operations_pk PRIMARY KEY (visit, operation))"
 
                 db.execute(connection, query, function(connection, result, err) {
