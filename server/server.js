@@ -188,7 +188,7 @@ router.route('/owner')
             req.body.name,
             req.body.surname
         );
-
+        console.log(owner.toarray());
         // creating connection to db
         db.connect().then(function(connection) {
             // performing insert
