@@ -221,8 +221,12 @@ DB.prototype.update = function(connection, tablename, fields, callback) {
     if (this.connection) {
         // creating query string
         var queryString = "UPDATE " + tablename + " SET ";
+        var parseField = function(field) {
+            if (typeof(field) == "number") return field;
+            else return "'"+field+"'";
+        }
         for (var k in fields) {
-            queryString += "" + k + " = " + fields[k] + ", ";
+            queryString += "" + k + " = " + parseField(fields[k]) + ", ";
         }
         queryString = queryString.slice(0, queryString.length-2);
         console.log(queryString);
