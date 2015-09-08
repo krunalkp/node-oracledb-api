@@ -28,21 +28,25 @@
 <table data-height="300" class="table table-bordered">
   <thead>
     <tr>
+      <th>codice</th>
       <th>Nome</th>
       <th>Data</th>
       <th>Genere</th>
       <th>Razza</th>
       <th>Padrone</th>
+      <th>Tipo</th>
       <!-- this line is used to modify data-->
       <th></th>
     </tr>
   </thead>
-  <tr ng-repeat="animal in animals" id="{{animal[5]}}">
-    <td><a ng-href="#/animal/{{animal[5]}}" href="#">{{animal[0]}}</a></td>
+  <tr ng-repeat="animal in animals" id="{{animal[0]}}">
+    <td><a ng-href="#/animal/{{animal[0]}}" href="#">{{animal[0]}}</a></td>
     <td>{{animal[1]}}</td>
     <td>{{animal[2]}}</td>
     <td>{{animal[3]}}</td>
     <td>{{animal[4]}}</td>
+    <td>{{animal[5]}}</td>
+    <th>{{animal[6]}}</th>
     <td>
       <button ng-click="deleteAnimal(this)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
       <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>

@@ -3,35 +3,42 @@ Class("HomeController",{
         Controller.call(this, module, name, dependencies);
     },
 
-    control: function($scope, $routeParams, API) {
-        //this._control($scope);
-        $scope.name = "Marco";
-        $scope.names = ["marco", "michael", "giulio"];
-        /*API.testConnection().success(function(response) {
-            if (response.status) {
-                $scope.connected = "ok";
+    control: function($scope, $route, $routeParams, API) {
+       // retrieving all animals
+        $scope.animals = [["", "", "", "", ""]];
+
+        API.getAllAnimals().then(function(response) {
+            if (response.data.status == "ok") {
+                $scope.animals = response.data.message.rows;
+                console.log($scope.animals);
+                if ($scope.animals.length == 0) {
+                    $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
+                }
             } else {
-                $scope.connected = "not ok";
+                // we didn't retrieve animals, using empty list.
+                $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
             }
-        });*/
-        console.log($routeParams)
-        /*
-            cosa dobbiamo mostrare?
+        }, function(error) {
+            // displaying error inside table
+            $scope.animals = [["Error while connecting to server.", "", "", "", ""]];
+        });
 
-            - numero di visite compiute
-            - numero di interventi
-            - numero di animali
-            - numero di padroni
+        // retrieving all animals
+        $scope.owners = [];
 
-            - nuova visita
-            - nuovo intervendo
-            - nuovo cliente
-
-            - non posso aggiungere un animale senza un padrone
-            - se voglio aggiungere un nuovo animale, devo andare nella scheda del
-            - cliente e aggiungere un animale.
-        */
+        API.getAllOwners().then(function(response) {
+            if (response.data.status == "ok") {
+                console.log(response.data);
+                $scope.owners = response.data.message.rows;
+            } else {
+                // we didn't retrieve owners, using empty list.
+                $scope.owners = [["Nessun proprietario inserito", "", ""]];
+            }
+        }, function(error) {
+            // displaying error inside table
+            $scope.owners = [["ERROR WHILE CONNECTING TO SERVER","", ""]];
+        });
     }
 })._extends("Controller");
 
-home = new HomeController("Veterinario.Controllers", "HomeController", ['$scope', '$routeParams', 'API'], []);
+home = new HomeController("Veterinario.Controllers", "HomeController", ['$scope', '$route', '$routeParams', 'API'], []);
