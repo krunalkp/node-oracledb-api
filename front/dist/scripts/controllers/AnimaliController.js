@@ -102,7 +102,7 @@ Class("AnimaliController",{
             console.log(race);
             console.log(type);
 
-            API.newAnimal(name, date, genre, race, owner, type).then(function(response) {
+            API.newAnimal(name, date, race, genre, owner, type).then(function(response) {
                 if (response.data.status == "ok") {
                     // showing success dialog
                     swal("Success!", "A new animal has been created.", "success");

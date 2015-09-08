@@ -18,21 +18,22 @@ Class("AnimaliDetailController",{
         API.getAnimal(animalId).then(function(response) {
             if (response.data.status == "ok") {
                 // retrieving animal informations
-                $scope.name = response.data.message.name;
-                $scope.date = response.data.message.date;
-                $scope.genre = response.data.message.genre;
-                $scope.owner = response.data.message.owner;
-                $scope.race = response.data.message.race;
-                $scope.code = response.data.message.code;
+                $scope.code = response.data.message.rows[0][0];
+                $scope.name = response.data.message.rows[0][1];
+                $scope.date = response.data.message.rows[0][2];
+                $scope.genre = response.data.message.rows[0][3];
+                $scope.owner = response.data.message.rows[0][5];
+                $scope.race = response.data.message.rows[0][4];
+                $scope.type = response.data.message.rows[0][6];
 
                 // recuperare i dati del padrone. uso il codice fiscale in $scope.owner per recuperare il padrone
                 $scope.animalOwner = {};
                 API.getOwner($scope.owner).then(function(response) {
                     if (response.data.status == "ok") {
                         $scope.animalOwner = {
-                            name: response.data.message.name,
-                            surname: response.data.message.surname,
-                            cf: response.data.message.cf
+                            cf : response.data.message.rows[0][0],
+                            name : response.data.message.rows[0][1],
+                            surname : response.data.message.rows[0][2]
                         }
                     } else {
                         $scope.animalOwner = {
@@ -53,7 +54,7 @@ Class("AnimaliDetailController",{
                 $scope.visits = [];
                 API.getVisitsById($scope.code).then(function(response) {
                     if (response.data.status == "ok") {
-                        $scope.visits = response.data.message;
+                        $scope.visits = response.data.message.rows;
                     } else {
                         $scope.visits = [{
                             date: "",
