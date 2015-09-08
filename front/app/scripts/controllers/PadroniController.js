@@ -13,19 +13,11 @@ Class("PadroniController",{
                 $scope.owners = response.data.message.rows;
             } else {
                 // we didn't retrieve owners, using empty list.
-                $scope.owners = [{
-                    name: "Nessun proprietario inserito",
-                    surname: "",
-                    cf: ""
-                }];
+                $scope.owners = [["Nessun proprietario inserito", "", ""]];
             }
         }, function(error) {
             // displaying error inside table
-            $scope.owners = [{
-                name: "ERROR WHILE CONNECTING TO SERVER",
-                surname: "",
-                cf: "CIAO" // @TODO remove this codes, we don't need this.
-            }];
+            $scope.owners = [["ERROR WHILE CONNECTING TO SERVER","", ""]];
         });
 
         // creating a new owner

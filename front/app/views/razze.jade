@@ -1,0 +1,45 @@
+div.page-header
+    h1 Lista Razze
+
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new race modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#raceModal") Crea Nuovo
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Razza
+            th Tipo
+            th
+    tr(ng-repeat="race in races", id="{{race[0]}}")
+        td
+            a(ng-href="#/race/{{race[0]}}", href="#") {{race[0]}}
+        td {{race[1]}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteRace(this);")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new race modal
+
+div#raceModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Nuova Razza
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="raceName") Razza
+                        input#raceName.form-control(type="text", placeholder="Inserisci un nome")
+                    div.form-group
+                        label(for="raceType") Tipo
+                        select#raceType.form-control
+                            option(ng-repeat="type in types", value="{{type[0]}}") {{type[0]}}
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newRace()") Save changes

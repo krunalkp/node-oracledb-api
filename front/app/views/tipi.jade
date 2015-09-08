@@ -1,0 +1,39 @@
+div.page-header
+    h1 Lista Tipi di Animali
+
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new race modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#typeModal") Crea Nuovo
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Tipo di Animale
+            th
+    tr(ng-repeat="type in types", id="{{type[0]}}")
+        td
+            a(ng-href="#/type/{{type[0]}}", href="#") {{type[0]}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteType(this);")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new type modal
+
+div#typeModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Nuovo Tipo di Animale
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="raceType") Tipo
+                        input#raceType.form-control(type="text", placeholder="Inserisci un nome")
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newType()") Save changes

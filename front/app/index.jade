@@ -36,6 +36,9 @@ head
     script(src="/scripts/controllers/AnimaliController.js")
     script(src="/scripts/controllers/PadroniController.js")
     script(src="/scripts/controllers/VisiteController.js")
+    script(src="/scripts/controllers/RaceController.js")
+    script(src="/scripts/controllers/TypeController.js")
+    script(src="/scripts/controllers/OperationController.js")
     script(src="/scripts/controllers/PadroniDetailController.js")
     script(src="/scripts/controllers/AnimaliDetailController.js")
     script(src="/scripts/controllers/VisiteDetailController.js")
@@ -46,6 +49,9 @@ body(ng-app="Veterinario")
         // Sidebar
         div#sidebar-wrapper
             ul.sidebar-nav
+                li.sidebar-brand(style="background-color: cadetblue;")
+                    a(ng-href="#/", href="#", style="color: white !important;")
+                        | Home
                 li.sidebar-brand
                     a(ng-href="#/animal", href="#")
                         | Animali
@@ -55,6 +61,17 @@ body(ng-app="Veterinario")
                 li.sidebar-brand
                     a(ng-href="#/visit", href="#")
                         | Visite
+                li.sidebar-brand
+                    hr
+                li.sidebar-brand
+                    a(ng-href="#/race", href="#")
+                        | Razze
+                li.sidebar-brand
+                    a(ng-href="#/type", href="#")
+                        | Tipi
+                li.sidebar-brand
+                    a(ng-href="#/operation", href="#")
+                        | Operation
         div#page-content-wrapper
             div.container-fluid
                 div.row

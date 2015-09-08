@@ -1,5 +1,5 @@
-Class("AnimaliController",{
-    AnimaliController: function(module, name, dependencies) {
+Class("OperationController",{
+    OperationController: function(module, name, dependencies) {
         Controller.call(this, module, name, dependencies);
     },
 
@@ -121,4 +121,4 @@ Class("AnimaliController",{
     }
 })._extends("Controller");
 
-animali = new AnimaliController("Veterinario.Controllers", "AnimaliController", ['$scope', '$route', '$routeParams', 'API'], []);
+razze = new OperationController("Veterinario.Controllers", "OperationController", ['$scope', '$route', '$routeParams', 'API'], []);

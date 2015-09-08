@@ -25,23 +25,14 @@ Class("PadroniDetailController",{
                 API.getAnimalById($scope.cf).then(function(response) {
                     if (response.data.status == "ok") {
                         $scope.animals = response.data.message.rows;
+                        if ($scope.animals.length == 0) {
+                            $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato"]];
+                        }
                     } else {
-                        $scope.animals = [{
-                            name: "ancora",
-                            date: "nessun",
-                            genre: "animale",
-                            race: "è stato",
-                            owner: "registrato"
-                        }];
+                        $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato"]];
                     }
                 }, function(error) {
-                    $scope.animals = [{
-                        name: "Errore durante recupero lista animali",
-                        date: "",
-                        genre: "",
-                        race: "",
-                        owner: ""
-                    }];
+                    $scope.animals = [["Errore durante recupero degli animali", "", "", "", ""]];
                 });
             } else {
                 $scope.name = "Proprietario non trovato";

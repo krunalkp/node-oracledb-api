@@ -1,0 +1,56 @@
+
+<div class="page-header">
+  <h1>Lista Razze</h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-12">
+    <!-- this button should trigger the new race modal-->
+    <button type="button" data-toggle="modal" data-target="#raceModal" class="btn btn-default">Crea Nuovo</button>
+  </div>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Razza</th>
+      <th>Tipo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tr ng-repeat="race in races" id="{{race[0]}}">
+    <td><a ng-href="#/race/{{race[0]}}" href="#">{{race[0]}}</a></td>
+    <td>{{race[1]}}</td>
+    <td>
+      <button ng-click="deleteRace(this);" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+    </td>
+  </tr>
+</table>
+<!-- new race modal-->
+<div id="raceModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nuova Razza</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="raceName">Razza</label>
+            <input id="raceName" type="text" placeholder="Inserisci un nome" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="raceType">Tipo</label>
+            <select id="animalRace" class="form-control">
+              <option ng-repeat="type in types" value="{{type[0]}}">{{type[0]}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close </button>
+        <button type="button" data-dismiss="modal" ng-click="newRace()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

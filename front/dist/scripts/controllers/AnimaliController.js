@@ -5,58 +5,55 @@ Class("AnimaliController",{
 
     control: function($scope, $route, $routeParams, API) {
         // retrieving all animals
-        $scope.animals = [];
+        $scope.animals = [["", "", "", "", ""]];
 
         API.getAllAnimals().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.animals = response.data.message.rows;
+                if ($scope.animals.length == 0) {
+                    $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
+                }
             } else {
                 // we didn't retrieve animals, using empty list.
-                $scope.animals = [{
-                    name: "ancora",
-                    date: "nessun",
-                    genre: "animale",
-                    race: "è stato",
-                    owner: "registrato"
-                }];
+                $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
             }
         }, function(error) {
             // displaying error inside table
-            $scope.animals = [{
-                name: "ERROR",
-                date: "WHILE",
-                genre: "CONNECTING",
-                race: "TO",
-                owner: "SERVER",
-                code: "CIAO" // @TODO remove this codes, we don't need this.
-            }];
+            $scope.animals = [["Error while connecting to server.", "", "", "", ""]];
         });
 
         // retrieving all owners
         $scope.owners = [];
+        $scope.noOwners = false;
         API.getAllOwners().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.owners = response.data.message.rows;
+                if ($scope.owners.length == 0) {
+                    $scope.owners = [["No owners in DB, please create one"]];
+                    $scope.noOwners = true;
+                }
             } else {
                 // no owners in our db
-                $scope.owners = ["No owners in DB, please create one"];
+                $scope.owners = [["No owners in DB, please create one"]];
+                $scope.noOwners = true;
             }
         }, function(error) {
-            $scope.owners = ["ERROR"];
+            $scope.owners = [["ERROR"]];
         });
         // retrieving all types ( cane, gatto.. )
         $scope.types = [];
-        $scope.noTypes = false;
         API.getAllTypes().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.types = response.data.message.rows;
+                if ($scope.types.length == 0) {
+                    $scope.types = [["No animal types in DB, please create one"]];
+                }
             } else {
                 // no types in our db
-                $scope.types = ["No animal types in DB, please create one"];
-                $scope.noTypes = true;
+                $scope.types = [["No animal types in DB, please create one"]];
             }
         }, function(error) {
-            $scope.types = ["ERROR"];
+            $scope.types = [["ERROR"]];
         });
 
         // retrieving all races ( razze di cane, razze di gatto..)
@@ -65,20 +62,24 @@ Class("AnimaliController",{
         API.getAllRaces().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.races = response.data.message.rows;
+                if ($scope.races.length == 0) {
+                    $scope.races = [["No races in our db, please create one"]];
+                    $scope.noRaces = true;
+                }
             } else {
                 // no races in our db
-                $scope.races = ["No races in our db, please create one"];
+                $scope.races = [["No races in our db, please create one"]];
                 $scope.noRaces = true;
             }
         }, function(error) {
-            $scope.races = ["ERROR"];
+            $scope.races = [["ERROR"]];
         });
 
         // creating a new animal
         $scope.newAnimal = function() {
             console.log(this);
-            if ($scope.noRaces || $scope.noTypes) {
-                swal("Error!", "Please ensure you created both races and types.", "error");
+            if ($scope.noRaces || $scope.noOwners) {
+                swal("Error!", "Please ensure you created both races and owner.", "error");
                 return;
             }
             // trying to read form values

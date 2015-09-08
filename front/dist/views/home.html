@@ -1,5 +1,39 @@
 
-<h1>Home</h1>
-<h6>Elenco Animali</h6>
-<h6>Elenco Padroni</h6>
-<h6>Elenco Visite</h6>
+<div class="page-header">
+  <h1>Lista Animali</h1>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data</th>
+      <th>Genere</th>
+      <th>Razza</th>
+      <th>Padrone</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="animal in animals" id="{{animal[5]}}">
+    <td><a ng-href="#/animal/{{animal[5]}}" href="#">{{animal[0]}}</a></td>
+    <td>{{animal[1]}}</td>
+    <td>{{animal[2]}}</td>
+    <td>{{animal[3]}}</td>
+    <td>{{animal[4]}}</td>
+  </tr>
+</table>
+<div class="page-header">
+  <h1>Lista Padroni</h1>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>CF</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="owner in owners" id="{{owner[0]}}">
+    <td><a ng-href="#/owner/{{owner[0]}}" href="#">{{owner[0]}}</a></td>
+    <td>{{owner[1]}}</td>
+    <td>{{owner[2]}}</td>
+  </tr>
+</table>

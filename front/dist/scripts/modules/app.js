@@ -64,6 +64,27 @@ Class("Vet", {
             controlerAs: 'visiteDetailCtrl'
         })
 
+        .when('/race', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/razze.html',
+            controller: 'RaceController',
+            controlerAs: 'razzeCtrl'
+        })
+
+        .when('/type', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/tipi.html',
+            controller: 'TypeController',
+            controlerAs: 'tipiCtrl'
+        })
+
+        .when('/operation', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/operazioni.html',
+            controller: 'OperationController',
+            controlerAs: 'operazioniCtrl'
+        })
+
         /*
             404 NOT FOUND
         */

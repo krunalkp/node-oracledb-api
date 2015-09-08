@@ -283,11 +283,12 @@ router.route('/race')
             req.body.race,
             req.body.type
         );
-
+        console.log(race.toarray());
         // creating connection to db
         db.connect().then(function(connection) {
             // performing insert
             db.insert(connection, "vet_races", race.toarray(), function(connection, data) {
+                console.log(data);
                 res.send(data);
                 db.close(connection);
             });
