@@ -89,6 +89,8 @@ Class("AnimaliDetailController",{
             var genre = $('#animalGenre').val();
             var race = $('#animalRace').val();
             var owner = $('#animalOwner').val();
+
+            
             API.setAnimal(animalId, name, date, genre, race, owner).then(function(response) {
                 if (response.data.status == "ok") {
                     // showing success dialog

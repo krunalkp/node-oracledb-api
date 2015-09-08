@@ -1,4 +1,4 @@
-function Animal(name, date, genre, race, owner) {
+function Animal(name, date, genre, race, owner, type) {
     /*
         animale
         
@@ -14,6 +14,7 @@ function Animal(name, date, genre, race, owner) {
     this.genre = genre;
     this.race = race;
     this.owner = owner;
+    this.type = type;
     this.code = new Date().getTime();
 }
 
@@ -24,7 +25,7 @@ Animal.prototype.tojson = function() {
 
 // converting this object to array
 Animal.prototype.toarray = function() {
-    return [this.code, this.name, this.date, this.genre, this.race, this.owner];
+    return [this.code, this.name, this.date, this.genre, this.race, this.owner, this.type];
 }
 
 // creating table inside db

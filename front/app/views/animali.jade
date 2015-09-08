@@ -9,20 +9,24 @@ div.row(style="margin-bottom: 20px;")
 table.table.table-bordered(data-height="300")
     thead
         tr
+            th codice
             th Nome
             th Data
             th Genere
             th Razza
             th Padrone
+            th Tipo
             // this line is used to modify data
             th
-    tr(ng-repeat="animal in animals", id="{{animal[5]}}")
+    tr(ng-repeat="animal in animals", id="{{animal[0]}}")
         td
-            a(ng-href="#/animal/{{animal[5]}}", href="#") {{animal[0]}}
+            a(ng-href="#/animal/{{animal[0]}}", href="#") {{animal[0]}}
         td {{animal[1]}}
         td {{animal[2]}}
         td {{animal[3]}}
         td {{animal[4]}}
+        td {{animal[5]}}
+        th {{animal[6]}}
         td
             button.btn.btn-default.btn-xs(ng-click="deleteAnimal(this)")
                 span.glyphicon.glyphicon-remove
@@ -54,7 +58,7 @@ div#animalModal.modal.fade(tabindex="-1", role="dialog")
                     div.form-group
                         label(for="animalRace") Razza
                         select#animalRace.form-control
-                            option(ng-repeat="race in races", value="{{race[0]}}") {{race[0]}}
+                            option(ng-repeat="race in races", value="{{race[0]}}-{{race[1]}}") {{race[0]}} : {{race[1]}}
                     div.form-group
                         label(for="animalOwner") Padrone
                         select#animalOwner.form-control

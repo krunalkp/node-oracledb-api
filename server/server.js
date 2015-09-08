@@ -78,7 +78,8 @@ router.route('/animal')
             req.body.date,
             req.body.genre,
             req.body.race,
-            req.body.owner
+            req.body.owner,
+            req.body.type
         );
 
         // creating connection to db

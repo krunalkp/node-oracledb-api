@@ -10,6 +10,7 @@ Class("AnimaliController",{
         API.getAllAnimals().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.animals = response.data.message.rows;
+                console.log($scope.animals);
                 if ($scope.animals.length == 0) {
                     $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
                 }
@@ -42,15 +43,18 @@ Class("AnimaliController",{
         });
         // retrieving all types ( cane, gatto.. )
         $scope.types = [];
+        $scope.noTypes = false;
         API.getAllTypes().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.types = response.data.message.rows;
                 if ($scope.types.length == 0) {
                     $scope.types = [["No animal types in DB, please create one"]];
+                    $scope.noTypes = true;
                 }
             } else {
                 // no types in our db
                 $scope.types = [["No animal types in DB, please create one"]];
+                $scope.noTypes = true;
             }
         }, function(error) {
             $scope.types = [["ERROR"]];
@@ -86,9 +90,19 @@ Class("AnimaliController",{
             var name = $('#animalName').val();
             var date = $('#animalDate').val();
             var genre = $('#animalGenre').val();
-            var race = $('#animalRace').val();
+            var toSplit = $('#animalRace').val();
             var owner = $('#animalOwner').val();
-            API.newAnimal(name, date, genre, race, owner).then(function(response) {
+            var race = toSplit.split("-")[0];
+            var type = toSplit.split("-")[1];
+
+            console.log(name);
+            console.log(date);
+            console.log(genre);
+            console.log(owner);
+            console.log(race);
+            console.log(type);
+
+            API.newAnimal(name, date, genre, race, owner, type).then(function(response) {
                 if (response.data.status == "ok") {
                     // showing success dialog
                     swal("Success!", "A new animal has been created.", "success");
