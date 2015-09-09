@@ -524,7 +524,7 @@ router.route('/visitby/:_id')
                 res.send(data);
             });
         });
-    })
+    });
 
 // on routes that end in /visit/:bear_id
 // ----------------------------------------------------
@@ -536,6 +536,34 @@ router.route('/animalby/:_id')
         // req.body.param
         db.connect().then(function(connection) {
             db.select(connection, "*").from("vet_animals").where("owner", "=", "'" + req.params._id + "'").execute(function(data) {
+                console.log(arguments);
+                res.send(data);
+            });
+        });
+    });
+
+router.route('/animalbyrace/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_animals").where("race", "=", "'" + req.params._id + "'").execute(function(data) {
+                console.log(arguments);
+                res.send(data);
+            });
+        });
+    });
+
+router.route('/animalbytype/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_animals").where("type", "=", "'" + req.params._id + "'").execute(function(data) {
                 console.log(arguments);
                 res.send(data);
             });

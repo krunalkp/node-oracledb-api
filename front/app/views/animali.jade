@@ -27,9 +27,11 @@ table.table.table-bordered(data-height="300")
         td {{animal[1]}}
         td {{animal[2]}}
         td {{animal[3]}}
-        td {{animal[4]}}
+        td
+            a(ng-href="#/race/{{animal[4]}}", href="#") {{animal[4]}}
         td {{animal[5]}}
-        th {{animal[6]}}
+        td
+            a(ng-href="#/type/{{animal[6]}}", href="#") {{animal[6]}}
         td
             button.btn.btn-default.btn-xs(ng-click="deleteAnimal(this)")
                 span.glyphicon.glyphicon-remove

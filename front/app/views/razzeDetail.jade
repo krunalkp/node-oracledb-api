@@ -1,5 +1,10 @@
 div.page-header
-    h1 Lista Animali
+    h1 Lista Animali di Razza {{race}}
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
 
 table.table.table-bordered(data-height="300")
     thead
@@ -29,19 +34,3 @@ table.table.table-bordered(data-height="300")
                 span.glyphicon.glyphicon-remove
             button.btn.btn-default.btn-xs
                 span.glyphicon.glyphicon-pencil
-
-div.page-header
-    h1 Lista Padroni
-
-table.table.table-bordered(data-height="300")
-    thead
-        tr
-            th CF
-            th Nome
-            th Cognome
-
-    tr(ng-repeat="owner in owners", id="{{owner[0]}}")
-        td
-            a(ng-href="#/owner/{{owner[0]}}", href="#") {{owner[0]}}
-        td {{owner[1]}}
-        td {{owner[2]}}

@@ -71,11 +71,23 @@ Class("Vet", {
             controlerAs: 'razzeCtrl'
         })
 
+        .when('/race/:id', {
+            templateUrl: '../views/razzeDetail.html',
+            controller: 'RaceDetailController',
+            controlerAs: 'razzeDetailCtrl'
+        })
+
         .when('/type', {
             // Use the same partial views for for all languages
             templateUrl: '../views/tipi.html',
             controller: 'TypeController',
             controlerAs: 'tipiCtrl'
+        })
+
+        .when('/type/:id', {
+            templateUrl : '../views/tipiDetail.html',
+            controller: 'TypeDetailController',
+            controlerAs: 'tipiDetailCtrl'
         })
 
         .when('/operation', {
