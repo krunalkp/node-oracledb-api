@@ -211,7 +211,7 @@ DB.prototype.selectAll = function(connection, tablename, callback) {
 };
 
 // update
-DB.prototype.update = function(connection, tablename, fields, callback) {
+DB.prototype.update = function(connection, tablename, where_condition, fields, callback) {
     /*
         {
             "name": "newvalue",
@@ -230,6 +230,8 @@ DB.prototype.update = function(connection, tablename, fields, callback) {
             queryString += "" + k + " = " + parseField(fields[k]) + ", ";
         }
         queryString = queryString.slice(0, queryString.length-2);
+        queryString += " WHERE " + where_condition;
+        
         console.log(queryString);
         connection.execute(queryString, {}, {autoCommit: true, isAutoCommit: true}, function(err, result) {
             console.log(err);

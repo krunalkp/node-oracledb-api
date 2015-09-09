@@ -43,6 +43,12 @@ Type.create(db, function() {
     });
 });
 
+// utility
+var parseField = function(field) {
+    if (typeof(field) == "number") return field;
+    else return "'"+field+"'";
+}
+
 // ROUTES FOR OUR API
 // =============================================================================
 
@@ -131,7 +137,7 @@ router.route('/animal/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_animals", req.body, function() {
+            db.update(connection, "vet_animals", "code = " + parseField(req.params._id), req.body, function() {
                 db.close(connection);
                 res.send(data);
             });
@@ -254,7 +260,7 @@ router.route('/owner/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_owners", req.body, function(connection, data) {
+            db.update(connection, "vet_owners", "cf = " + parseField(req.params._id), req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -335,7 +341,7 @@ router.route('/race/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_races", req.body, function() {
+            db.update(connection, "vet_races", "race = " + parseField(req.params._id) , req.body, function() {
                 db.close(connection);
                 res.send(data);
             });
@@ -413,7 +419,7 @@ router.route('/operation/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_operations", req.body, function(connection, data) {
+            db.update(connection, "vet_operations", "type = " + parseField(req.params._id), req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -493,7 +499,7 @@ router.route('/visit/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_visits", req.body, function(connection, data) {
+            db.update(connection, "vet_visits", "code = " + parseField(req.params._id), req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });

@@ -9,7 +9,7 @@ function Visit(date, animal, notes) {
         > animale id
     */
     this.date = date;
-    this.notes = notes;
+    this.note = notes;
     this.animal = animal;
     this.code = new Date().getTime();
 }
@@ -21,7 +21,7 @@ Visit.prototype.tojson = function() {
 
 // converting this object to array
 Visit.prototype.toarray = function() {
-    return [this.code, this.date, this.notes, this.animal];
+    return [this.code, this.date, this.note, this.animal];
 }
 
 // creating table inside db
