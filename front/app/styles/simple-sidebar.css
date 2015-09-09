@@ -123,3 +123,7 @@
         margin-right: 0;
     }
 }
+
+.mytable {
+    table-layout: fixed;
+}

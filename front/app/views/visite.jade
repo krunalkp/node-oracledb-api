@@ -2,24 +2,27 @@ div.page-header
     h1 Lista Visite
     
 div.row(style="margin-bottom: 20px;")
-    div.col-lg-12
+    div.col-lg-4
         // this button should trigger the new animal modal
         button.btn.btn-default(type="button", data-toggle="modal", data-target="#visitModal") Crea Nuovo
+    div.col-lg-7.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
 
-table.table.table-bordered(data-height="300")
+table.table.table-bordered(data-height="300", width="100%", style="table-layout:fixed;")
     thead
         tr
-            th codice
-            th Data
-            th Note
-            th Animal
+            th.col-md-2 codice
+            th.col-md-1 Data
+            th.col-md-6 Note
+            th.col-md-2 Animal
             // this line is used to modify data
-            th
-    tr(ng-repeat="visit in visits", id="{{visit[0]}}")
+            th.col-md-1
+    tr(ng-repeat="visit in visits | filter:query", id="{{visit[0]}}")
         td
             a(ng-href="#/visit/{{visit[0]}}", href="#") {{visit[0]}}
         td {{visit[1]}}
-        td {{visit[2]}}
+        td(style="word-break: break-all;") {{visit[2]}}
         td
             a(ng-href="#/animal/{{visit[3]}}", href="#") {{visit[3]}}
         td

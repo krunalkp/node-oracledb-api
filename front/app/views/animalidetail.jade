@@ -44,15 +44,18 @@ table.table.table-bordered(data-height="300")
 div.row(style="margin-bottom: 20px;")
     h3 Visite Sostenute
 
-table.table.table-bordered(data-height="300")
+table.table.table-bordered(data-height="300", width="100%", style="table-layout:fixed;")
     thead
         tr
-            th Date
-            th Notes
-    tr(ng-repeat="visit in visits", id="{{visit.code}}")
+            th.col-md-2 codice
+            th.col-md-2 Data
+            th.col-md-8 Note
+
+    tr(ng-repeat="visit in visits", id="{{visit[0]}}")
         td
-            a(ng-href="#/visit/{{visit.code}}", href="#") {{visit.date}}
-        td {{visit.notes}}
+            a(ng-href="#/visit/{{visit[0]}}", href="#") {{visit[0]}}
+        td {{visit[1]}}
+        td(style="word-break: break-all;") {{visit[2]}}
 
 // new animal modal
 

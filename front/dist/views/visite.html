@@ -3,26 +3,29 @@
   <h1>Lista Visite</h1>
 </div>
 <div style="margin-bottom: 20px;" class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-4">
     <!-- this button should trigger the new animal modal-->
     <button type="button" data-toggle="modal" data-target="#visitModal" class="btn btn-default">Crea Nuovo</button>
   </div>
+  <div class="col-lg-7 input-group"><span id="search-label" class="input-group-addon">Cerca</span>
+    <input type="text" ng-model="query" aria-describedby="search-label" class="form-control"/>
+  </div>
 </div>
-<table data-height="300" class="table table-bordered">
+<table data-height="300" width="100%" style="table-layout:fixed;" class="table table-bordered">
   <thead>
     <tr>
-      <th>codice</th>
-      <th>Data</th>
-      <th>Note</th>
-      <th>Animal</th>
+      <th class="col-md-2">codice</th>
+      <th class="col-md-1">Data</th>
+      <th class="col-md-6">Note</th>
+      <th class="col-md-2">Animal</th>
       <!-- this line is used to modify data-->
-      <th></th>
+      <th class="col-md-1"></th>
     </tr>
   </thead>
-  <tr ng-repeat="visit in visits" id="{{visit[0]}}">
+  <tr ng-repeat="visit in visits | filter:query" id="{{visit[0]}}">
     <td><a ng-href="#/visit/{{visit[0]}}" href="#">{{visit[0]}}</a></td>
     <td>{{visit[1]}}</td>
-    <td>{{visit[2]}}</td>
+    <td style="word-break: break-all;">{{visit[2]}}</td>
     <td><a ng-href="#/animal/{{visit[3]}}" href="#">{{visit[3]}}</a></td>
     <td>
       <button ng-click="deleteVisit(this)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>

@@ -231,7 +231,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         var params = {
             date: date,
             animal: animal,
-            note: note
+            notes: note
         }
         return $http.post(url, params);
     };

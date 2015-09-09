@@ -55,21 +55,14 @@ Class("AnimaliDetailController",{
                 API.getVisitById($scope.code).then(function(response) {
                     if (response.data.status == "ok") {
                         $scope.visits = response.data.message.rows;
+                        if ($scope.visits.length == 0) {
+                            $scope.visits = [["Nessuna visita inserita", "", "", ""]];
+                        }
                     } else {
-                        $scope.visits = [{
-                            date: "",
-                            notes: "Could not find any visit for this animal",
-                            animal: "",
-                            code: "",
-                        }];
+                        $scope.visits = [["Nessuna visita inserita", "", "", ""]];
                     }
                 }, function(error) {
-                    $scope.visits = [{
-                        date: "",
-                        notes: "Error while retrieving visits for this animal",
-                        animal: "",
-                        code: "",
-                    }];
+                    $scope.visits = [["Errore nel recupero visite", "", "", ""]];
                 });
             } else {
                 $scope.name = "Animale non trovato";

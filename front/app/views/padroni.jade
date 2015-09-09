@@ -2,9 +2,12 @@ div.page-header
     h1 Lista Padroni
     
 div.row(style="margin-bottom: 20px;")
-    div.col-lg-12
+    div.col-lg-4
         // this button should trigger the new owner modal
         button.btn.btn-default(type="button", data-toggle="modal", data-target="#ownerModal") Crea Nuovo
+    div.col-lg-7.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
 
 table.table.table-bordered(data-height="300")
     thead
@@ -14,7 +17,7 @@ table.table.table-bordered(data-height="300")
             th Cognome
             // this line is used to modify data
             th
-    tr(ng-repeat="owner in owners", id="{{owner[0]}}")
+    tr(ng-repeat="owner in owners | filter:query", id="{{owner[0]}}")
         td
             a(ng-href="#/owner/{{owner[0]}}", href="#") {{owner[0]}}
         td {{owner[1]}}

@@ -3,9 +3,12 @@
   <h1>Lista Animali</h1>
 </div>
 <div style="margin-bottom: 20px;" class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-4">
     <!-- this button should trigger the new animal modal-->
     <button type="button" data-toggle="modal" data-target="#animalModal" class="btn btn-default">Crea Nuovo</button>
+  </div>
+  <div class="col-lg-7 input-group"><span id="search-label" class="input-group-addon">Cerca</span>
+    <input type="text" ng-model="query" aria-describedby="search-label" class="form-control"/>
   </div>
 </div>
 <table data-height="300" class="table table-bordered">
@@ -22,7 +25,7 @@
       <th></th>
     </tr>
   </thead>
-  <tr ng-repeat="animal in animals" id="{{animal[0]}}">
+  <tr ng-repeat="animal in animals | filter:query" id="{{animal[0]}}">
     <td><a ng-href="#/animal/{{animal[0]}}" href="#">{{animal[0]}}</a></td>
     <td>{{animal[1]}}</td>
     <td>{{animal[2]}}</td>

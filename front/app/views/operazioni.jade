@@ -2,16 +2,19 @@ div.page-header
     h1 Lista Tipi di Operazioni
 
 div.row(style="margin-bottom: 20px;")
-    div.col-lg-12
+    div.col-lg-4
         // this button should trigger the new race modal
         button.btn.btn-default(operation="button", data-toggle="modal", data-target="#operationModal") Crea Nuovo
+    div.col-lg-7.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
 
 table.table.table-bordered(data-height="300")
     thead
         tr
             th Tipo di Operazione
             th
-    tr(ng-repeat="operation in operations", id="{{operation[0]}}")
+    tr(ng-repeat="operation in operations | filter:query", id="{{operation[0]}}")
         td
             a(ng-href="#/operation/{{operation[0]}}", href="#") {{operation[0]}}
         td

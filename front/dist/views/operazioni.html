@@ -3,9 +3,12 @@
   <h1>Lista Tipi di Operazioni</h1>
 </div>
 <div style="margin-bottom: 20px;" class="row">
-  <div class="col-lg-12">
+  <div class="col-lg-4">
     <!-- this button should trigger the new race modal-->
     <button operation="button" data-toggle="modal" data-target="#operationModal" class="btn btn-default">Crea Nuovo</button>
+  </div>
+  <div class="col-lg-7 input-group"><span id="search-label" class="input-group-addon">Cerca</span>
+    <input type="text" ng-model="query" aria-describedby="search-label" class="form-control"/>
   </div>
 </div>
 <table data-height="300" class="table table-bordered">
@@ -15,7 +18,7 @@
       <th></th>
     </tr>
   </thead>
-  <tr ng-repeat="operation in operations" id="{{operation[0]}}">
+  <tr ng-repeat="operation in operations | filter:query" id="{{operation[0]}}">
     <td><a ng-href="#/operation/{{operation[0]}}" href="#">{{operation[0]}}</a></td>
     <td>
       <button ng-click="deleteOperation(this);" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
