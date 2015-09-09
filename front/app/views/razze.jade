@@ -15,7 +15,8 @@ table.table.table-bordered(data-height="300")
     tr(ng-repeat="race in races", id="{{race[0]}}")
         td
             a(ng-href="#/race/{{race[0]}}", href="#") {{race[0]}}
-        td {{race[1]}}
+        td
+            a(ng-href="#/type/{{race[1]}}", href="#") {{race[1]}}
         td
             button.btn.btn-default.btn-xs(ng-click="deleteRace(this);")
                 span.glyphicon.glyphicon-remove

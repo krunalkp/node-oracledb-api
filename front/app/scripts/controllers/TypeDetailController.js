@@ -7,7 +7,7 @@ Class("TypeDetailController",{
         // we are inside animali detail controller
         // we need animalid
         var type = $routeParams.id;
-        %scope.type = type;
+        $scope.type = type;
 
         // retrieving all animals
         $scope.animals = [["", "", "", "", ""]];

@@ -346,7 +346,7 @@ router.route('/race/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_races", "race = " + req.params._id, function(data) {
+            db.delete(connection, "vet_races", "race = " + req.params._id, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -413,7 +413,7 @@ router.route('/operation/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connection().then(function(connection) {
-            db.update(connection, "vet_operations", req.body, function() {
+            db.update(connection, "vet_operations", req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -424,7 +424,7 @@ router.route('/operation/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_operations", "type = " + req.params._id, function(data) {
+            db.delete(connection, "vet_operations", "type = " + req.params._id, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -493,7 +493,7 @@ router.route('/visit/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connection().then(function(connection) {
-            db.update(connection, "vet_visits", req.body, function() {
+            db.update(connection, "vet_visits", req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -504,7 +504,7 @@ router.route('/visit/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_visits", "code = " + req.params._id, function(data) {
+            db.delete(connection, "vet_visits", "code = " + req.params._id, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });

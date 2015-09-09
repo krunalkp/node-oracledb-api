@@ -1,1 +1,45 @@
-h1 Dettaglio Visite
+div.page-header
+    h1 Dettaglio Visita
+        small {{visitId}}
+
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new animal modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#visitModal") Modifica
+
+div.jumbotron
+    h4 codice visita: {{visitId}}
+    h4 data visita: {{data}}
+    br
+    h4 Note sulla visita:
+    p {{note}}
+    p
+        a.btn.btn-default.btn-lg(ng-href="#/animal/{{animal}}", href="#", role="button") Scheda Animale
+
+// new visit modal
+
+div#visitModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Modifica Visita
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="visitDate") Data
+                        input#visitDate.form-control(type="text", placeholder="Inserisci una data", value="{{data}}")
+                    div.form-group
+                        label(for="visitNotes") Note
+                        textarea#visitNotes.form-control(type="text", placeholder="Inserisci un nome", rows="10")
+                    div.form-group
+                        label(for="visitAnimal") Animale
+                        select#visitAnimal.form-control
+                            option(ng-repeat="animal in animals", value="{{animal[0]}}") {{animal[0]}} : {{animal[1]}}
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="modifyVisit()") Save changes
+
+script document.getElementById("visitNotes").value = "{{note}}";

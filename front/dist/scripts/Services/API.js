@@ -1,8 +1,8 @@
 new Service("Veterinario.Services", "API", "http", function($http) {
 
     var API = {};
-    var IPs = ["192.168.1.92"]
-    var BASE_URL = "http://192.168.0.108:10000/api";//"http://10.13.246.169:10000/api"
+    var IPs = ["192.168.1.92", "192.168.0.108", "10.13.246.169"];
+    var BASE_URL = "http://"+IPs[1]+":10000/api";//"http://10.13.246.169:10000/api"
 
     API.testConnection = function() {
         return $http({
@@ -228,7 +228,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
 
     API.getVisit = function(visitId) {
         // get VisitId Visit
-        var url = BASE_URL + "/visit/" + VisitId
+        var url = BASE_URL + "/visit/" + visitId
         return $http.get(url);
     };
 
@@ -255,7 +255,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         var params = {
             date: date,
             animal: animal,
-            note: note
+            notes: note
         }
         return $http.put(url, params);
     };

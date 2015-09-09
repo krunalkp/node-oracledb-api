@@ -1,2 +1,51 @@
 
-<h1>Dettaglio Visite</h1>
+<div class="page-header">
+  <h1>Dettaglio Visita<small>{{visitId}}</small></h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-12">
+    <!-- this button should trigger the new animal modal-->
+    <button type="button" data-toggle="modal" data-target="#visitModal" class="btn btn-default">Modifica</button>
+  </div>
+</div>
+<div class="jumbotron">
+  <h4>codice visita: {{visitId}}</h4>
+  <h4>data visita: {{data}}</h4><br/>
+  <h4>Note sulla visita:</h4>
+  <p>{{note}}</p>
+  <p><a ng-href="#/animal/{{animal}}" href="#" role="button" class="btn btn-default btn-lg">Scheda Animale</a></p>
+</div>
+<!-- new visit modal-->
+<div id="visitModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modifica Visita</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="visitDate">Data</label>
+            <input id="visitDate" type="text" placeholder="Inserisci una data" value="{{data}}" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="visitNotes">Note</label>
+            <textarea id="visitNotes" type="text" placeholder="Inserisci un nome" rows="10" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="visitAnimal">Animale</label>
+            <select id="visitAnimal" class="form-control">
+              <option ng-repeat="animal in animals" value="{{animal[0]}}">{{animal[0]}} : {{animal[1]}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close </button>
+        <button type="button" data-dismiss="modal" ng-click="modifyVisit()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>document.getElementById("visitNotes").value = "{{note}}";</script>
