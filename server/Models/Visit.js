@@ -44,7 +44,7 @@ Visit.create = function(db, callback) {
             query = "CREATE TABLE vet_visits (";
             query += "code NUMBER PRIMARY KEY, "
             query += "visit_date VARCHAR2(20) NOT NULL, "
-            query += "note VARCHAR2(20) NOT NULL, "
+            query += "note VARCHAR2(1000) NOT NULL, "
             query += "animal NUMBER NOT NULL CONSTRAINT fk_vet_visits REFERENCES vet_animals(code) ON DELETE CASCADE)";
 
             db.execute(connection, query, function(connection, result, err) {

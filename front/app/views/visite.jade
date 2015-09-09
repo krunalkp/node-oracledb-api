@@ -1,1 +1,54 @@
-h1 Lista Visite
+div.page-header
+    h1 Lista Visite
+    
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12
+        // this button should trigger the new animal modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#visitModal") Crea Nuovo
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th codice
+            th Data
+            th Note
+            th Animal
+            // this line is used to modify data
+            th
+    tr(ng-repeat="visit in visits", id="{{visit[0]}}")
+        td
+            a(ng-href="#/visit/{{visit[0]}}", href="#") {{visit[0]}}
+        td {{visit[1]}}
+        td {{visit[2]}}
+        td
+            a(ng-href="#/animal/{{visit[3]}}", href="#") {{visit[3]}}
+        td
+            button.btn.btn-default.btn-xs(ng-click="deleteVisit(this)")
+                span.glyphicon.glyphicon-remove
+            button.btn.btn-default.btn-xs
+                span.glyphicon.glyphicon-pencil
+
+// new visit modal
+
+div#visitModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Nuova Visita
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="visitDate") Data
+                        input#visitDate.form-control(type="text", placeholder="Inserisci una data")
+                    div.form-group
+                        label(for="visitNotes") Note
+                        textarea#visitNotes.form-control(type="text", placeholder="Inserisci un nome")
+                    div.form-group
+                        label(for="visitAnimal") Razza
+                        select#visitAnimal.form-control
+                            option(ng-repeat="animal in animals", value="{{animal[0]}}") {{animal[0]}} : {{animal[1]}}
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="newVisit()") Save changes

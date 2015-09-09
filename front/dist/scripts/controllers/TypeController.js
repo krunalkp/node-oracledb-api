@@ -6,7 +6,7 @@ Class("TypeController",{
     control: function($scope, $route, $routeParams, API) {
 
         // retrieving all types ( cane, gatto.. )
-        $scope.types = [];
+        $scope.types = [[""]];
         API.getAllTypes().then(function(response) {
             if (response.data.status == "ok") {
                 $scope.types = response.data.message.rows;

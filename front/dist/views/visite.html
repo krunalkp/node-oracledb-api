@@ -1,2 +1,65 @@
 
-<h1>Lista Visite</h1>
+<div class="page-header">
+  <h1>Lista Visite</h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-12">
+    <!-- this button should trigger the new animal modal-->
+    <button type="button" data-toggle="modal" data-target="#visitModal" class="btn btn-default">Crea Nuovo</button>
+  </div>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>codice</th>
+      <th>Data</th>
+      <th>Note</th>
+      <th>Animal</th>
+      <!-- this line is used to modify data-->
+      <th></th>
+    </tr>
+  </thead>
+  <tr ng-repeat="visit in visits" id="{{visit[0]}}">
+    <td><a ng-href="#/visit/{{visit[0]}}" href="#">{{visit[0]}}</a></td>
+    <td>{{visit[1]}}</td>
+    <td>{{visit[2]}}</td>
+    <td><a ng-href="#/animal/{{visit[3]}}" href="#">{{visit[3]}}</a></td>
+    <td>
+      <button ng-click="deleteVisit(this)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+    </td>
+  </tr>
+</table>
+<!-- new visit modal-->
+<div id="visitModal" tabindex="-1" role="dialog" class="modal fade">
+  <div role="document" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Nuova Visita</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="visitDate">Data</label>
+            <input id="visitDate" type="text" placeholder="Inserisci una data" class="form-control"/>
+          </div>
+          <div class="form-group">
+            <label for="visitNotes">Note</label>
+            <textarea id="visitNotes" type="text" placeholder="Inserisci un nome" class="form-control"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="visitAnimal">Razza</label>
+            <select id="visitAnimal" class="form-control">
+              <option ng-repeat="animal in animals" value="{{animal[0]}}">{{animal[0]}} : {{animal[1]}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn btn-default">Close </button>
+        <button type="button" data-dismiss="modal" ng-click="newVisit()" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

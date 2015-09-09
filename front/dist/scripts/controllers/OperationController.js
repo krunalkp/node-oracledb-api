@@ -1,124 +1,66 @@
-Class("OperationController",{
+Class("OperationController", {
     OperationController: function(module, name, dependencies) {
         Controller.call(this, module, name, dependencies);
     },
 
     control: function($scope, $route, $routeParams, API) {
-        // retrieving all animals
-        $scope.animals = [["", "", "", "", ""]];
 
-        API.getAllAnimals().then(function(response) {
+        // retrieving all operation ( cane, gatto.. )
+        $scope.operations = [[""]];
+        API.getAllOperations().then(function(response) {
             if (response.data.status == "ok") {
-                $scope.animals = response.data.message.rows;
-                if ($scope.animals.length == 0) {
-                    $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
+                $scope.operations = response.data.message.rows;
+                if ($scope.operations.length == 0) {
+                    $scope.operations = [["No operation in DB, please create one"]];
                 }
             } else {
-                // we didn't retrieve animals, using empty list.
-                $scope.animals = [["ancora", "nessun", "animale", "è stato", "registrato" ]];
+                // no operation in our db
+                $scope.operations = [["No operation in DB, please create one"]];
             }
         }, function(error) {
-            // displaying error inside table
-            $scope.animals = [["Error while connecting to server.", "", "", "", ""]];
+            $scope.operations = [["ERROR"]];
         });
 
-        // retrieving all owners
-        $scope.owners = [];
-        $scope.noOwners = false;
-        API.getAllOwners().then(function(response) {
-            if (response.data.status == "ok") {
-                $scope.owners = response.data.message.rows;
-                if ($scope.owners.length == 0) {
-                    $scope.owners = [["No owners in DB, please create one"]];
-                    $scope.noOwners = true;
-                }
-            } else {
-                // no owners in our db
-                $scope.owners = [["No owners in DB, please create one"]];
-                $scope.noOwners = true;
-            }
-        }, function(error) {
-            $scope.owners = [["ERROR"]];
-        });
-        // retrieving all types ( cane, gatto.. )
-        $scope.types = [];
-        API.getAllTypes().then(function(response) {
-            if (response.data.status == "ok") {
-                $scope.types = response.data.message.rows;
-                if ($scope.types.length == 0) {
-                    $scope.types = [["No animal types in DB, please create one"]];
-                }
-            } else {
-                // no types in our db
-                $scope.types = [["No animal types in DB, please create one"]];
-            }
-        }, function(error) {
-            $scope.types = [["ERROR"]];
-        });
-
-        // retrieving all races ( razze di cane, razze di gatto..)
-        $scope.races = [];
-        $scope.noRaces = false;
-        API.getAllRaces().then(function(response) {
-            if (response.data.status == "ok") {
-                $scope.races = response.data.message.rows;
-                if ($scope.races.length == 0) {
-                    $scope.races = [["No races in our db, please create one"]];
-                    $scope.noRaces = true;
-                }
-            } else {
-                // no races in our db
-                $scope.races = [["No races in our db, please create one"]];
-                $scope.noRaces = true;
-            }
-        }, function(error) {
-            $scope.races = [["ERROR"]];
-        });
-
-        // creating a new animal
-        $scope.newAnimal = function() {
+        // creating a new operation
+        $scope.newOperation = function() {
             console.log(this);
-            if ($scope.noRaces || $scope.noOwners) {
-                swal("Error!", "Please ensure you created both races and owner.", "error");
-                return;
-            }
+
             // trying to read form values
-            var name = $('#animalName').val();
-            var date = $('#animalDate').val();
-            var genre = $('#animalGenre').val();
-            var race = $('#animalRace').val();
-            var owner = $('#animalOwner').val();
-            API.newAnimal(name, date, genre, race, owner).then(function(response) {
+            var operation = $('#operation').val();
+
+            API.newOperation(operation).then(function(response) {
+                console.log(response);
                 if (response.data.status == "ok") {
                     // showing success dialog
-                    swal("Success!", "A new animal has been created.", "success");
+                    swal("Success!", "A new operation has been created.", "success");
                     // reloading the current view
                     $route.reload();
                 } else {
-                    swal("Error!", "Something went wrong while creating new animal", "error");
+                    swal("Error!", "Something went wrong while creating new operation", "error");
                 }
             }, function(error) {
-                swal("Error! (bad request)", "Something went wrong while creating new animal", "error");
+                swal("Error! (bad request)", "Something went wrong while creating new operation", "error");
             });
         };
 
         // deleting animal
-        $scope.deleteAnimal = function(data) {
-            var animalId = data.animal[5];
-            API.deleteAnimal(animalId).then(function(response) {
+        $scope.deleteOperation = function(data) {
+            var operationId = data.operation[0];
+            API.deleteOperation(operationId).then(function(response) {
                 if (response.data.status == "ok") {
                     // we managed to destroy this animal
-                    swal("Success!", "Animal deleted", "success");
+                    swal("Success!", "operation deleted", "success");
                     // reloading the current view
                     $route.reload();
                 } else {
-                    swal("Error!", "We couldn't delete animal " + animalId, "error");
+                    swal("Error!", "We couldn't delete operation " + operationId, "error");
                 }
             }, function(error) {
-                swal("Error!", "An error occurred while deleting this animal", "error");
+                swal("Error!", "An error occurred while deleting this operation", "error");
             })
         }
+
     }
 })._extends("Controller");
 
-razze = new OperationController("Veterinario.Controllers", "OperationController", ['$scope', '$route', '$routeParams', 'API'], []);
+operazioni = new OperationController("Veterinario.Controllers", "OperationController", ['$scope', '$route', '$routeParams', 'API'], []);

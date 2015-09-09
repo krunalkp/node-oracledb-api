@@ -52,7 +52,7 @@ Class("AnimaliDetailController",{
 
                 // recupero informazioni su operazioni di questo animale
                 $scope.visits = [];
-                API.getVisitsById($scope.code).then(function(response) {
+                API.getVisitById($scope.code).then(function(response) {
                     if (response.data.status == "ok") {
                         $scope.visits = response.data.message.rows;
                     } else {

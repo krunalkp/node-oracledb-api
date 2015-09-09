@@ -225,7 +225,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         return $http.get(url);
     }
 
-    API.newVisit = function(date, animal, owner) {
+    API.newVisit = function(date, animal, note) {
         // creating a new Visit
         var url = BASE_URL + "/visit";
         var params = {
@@ -236,7 +236,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         return $http.post(url, params);
     };
 
-    API.setVisit = function(visitId, date, animal, owner) {
+    API.setVisit = function(visitId, date, animal, note) {
         // updating Visit
         var url = BASE_URL + "/visit/" + visitId
         var params = {
