@@ -130,7 +130,7 @@ router.route('/animal/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
-        db.connection().then(function(connection) {
+        db.connect().then(function(connection) {
             db.update(connection, "vet_animals", req.body, function() {
                 db.close(connection);
                 res.send(data);
@@ -334,7 +334,7 @@ router.route('/race/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
-        db.connection().then(function(connection) {
+        db.connect().then(function(connection) {
             db.update(connection, "vet_races", req.body, function() {
                 db.close(connection);
                 res.send(data);
@@ -412,7 +412,7 @@ router.route('/operation/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
-        db.connection().then(function(connection) {
+        db.connect().then(function(connection) {
             db.update(connection, "vet_operations", req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
@@ -492,7 +492,7 @@ router.route('/visit/:_id')
     // update the bear with this id
     .put(function(req, res) {
         // aggiornamento
-        db.connection().then(function(connection) {
+        db.connect().then(function(connection) {
             db.update(connection, "vet_visits", req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
