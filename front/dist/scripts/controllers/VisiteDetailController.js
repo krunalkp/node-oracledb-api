@@ -46,6 +46,21 @@ Class("VisiteDetailController",{
             $scope.animals = [["Error while connecting to server.", "", "", "", ""]];
         });
 
+        // recupero tutte le operazioni di questa visita
+        $scope.operations = [[""]];
+        API.getOperationByVisit(visitId).then(function(response) {
+            if (response.data.status == "ok") {
+                $scope.operations = response.data.message.rows;
+                console.log($scope.operations);
+                if ($scope.operations.length == 0) {
+                    $scope.operations = [["Nessuna operazione effettuata"]];
+                }
+            } else {
+                // we didn't retrieve animals, using empty list.
+                $scope.operations = [["Nessuna operazione effettuata"]];
+            }
+        })
+
         // inserire la modifica dei dati di un animale
         // quando clicco su modifica, scende un form come per la creazione, pre impostato con i valori di prima.
         // dopo aver fatto invia sul form, cambio i dati e ricarico la pagina.
@@ -78,6 +93,32 @@ Class("VisiteDetailController",{
                 swal("Error! (bad request)", "Errore del server durante la modifica della visita", "error");
             });
         };
+
+        $scope.addOperation = function() {
+            if ($scope.noAnimals) {
+                swal("Error!", "Non dovresti nemmeno essere qui.", "error");
+                return;
+            }
+
+            var visitId = $scope.visitId;
+
+            var operation = $('#visitOperation').val();
+
+            API.newVisitOperation(visitId, operation).then(function(response) {
+                console.log(response);
+                if (response.data.status == "ok") {
+                    // showing success dialog
+                    swal("Success!", "Visita modificata correttamente", "success");
+                    // reloading the current view
+                    $route.reload();
+                } else {
+                    swal("Error!", "Qualcosa è andato storto modificando la visita.", "error");
+                }
+            }, function(error) {
+                console.log(error);
+                swal("Error! (bad request)", "Errore del server durante la modifica della visita", "error");
+            });
+        }
     }
 })._extends("Controller");
 

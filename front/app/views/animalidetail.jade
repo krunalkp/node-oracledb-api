@@ -82,11 +82,11 @@ div#animalModal.modal.fade(tabindex="-1", role="dialog")
                     div.form-group
                         label(for="animalRace") Razza
                         select#animalRace.form-control
-                            option(ng-repeat="race in races", value="{{race}}") {{race}}
+                            option(ng-repeat="race in races", value="{{race[0]}}-{{race[1]}}") {{race[0]}} : {{race[1]}}
                     div.form-group
                         label(for="animalOwner") Padrone
                         select#animalOwner.form-control
-                            option(ng-repeat="owner in owners", value="{{owner}}") {{owner}}
+                            option(ng-repeat="owner in owners", value="{{owner[0]}}") {{owner[0]}} - {{owner[1]}} {{owner[2]}}
             div.modal-footer
                 button.btn.btn-default(type="button", data-dismiss="modal") Close 
                 button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="modifyAnimal()") Save changes

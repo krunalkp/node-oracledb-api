@@ -1,0 +1,19 @@
+
+<div class="page-header">
+  <h1>Lista Visite che hanno eseguito: {{operationId}}</h1>
+</div>
+<div style="margin-bottom: 20px;" class="row">
+  <div class="col-lg-12 input-group"><span id="search-label" class="input-group-addon">Cerca</span>
+    <input type="text" ng-model="query" aria-describedby="search-label" class="form-control"/>
+  </div>
+</div>
+<table data-height="300" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Visita</th>
+    </tr>
+  </thead>
+  <tr ng-repeat="visit in visits | filter:query" id="{{visit[0]}}">
+    <td><a ng-href="#/visit/{{visit[1]}}" href="#">{{visit[1]}}</a></td>
+  </tr>
+</table>

@@ -1,0 +1,15 @@
+div.page-header
+    h1 Lista Visite che hanno eseguito: {{operationId}}
+
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-12.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
+
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Visita
+    tr(ng-repeat="visit in visits | filter:query", id="{{visit[0]}}")
+        td
+            a(ng-href="#/visit/{{visit[1]}}", href="#") {{visit[1]}}

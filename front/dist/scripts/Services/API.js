@@ -249,6 +249,25 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         return $http.post(url, params);
     };
 
+    API.newVisitOperation = function(visitId, operationId) {
+        var url = BASE_URL + "/visitoperation";
+        var params = {
+            visit: visitId,
+            operation: operationId
+        }
+        return $http.post(url, params);
+    }
+
+    API.getVisitByOperation = function(operationId) {
+        var url = BASE_URL + "/visitoperation/" + operationId;
+        return $http.get(url)
+    }
+
+    API.getOperationByVisit = function(visitId) {
+        var url = BASE_URL + "/operationvisit/" + visitId;
+        return $http.get(url)
+    }
+
     API.setVisit = function(visitId, date, animal, note) {
         // updating Visit
         var url = BASE_URL + "/visit/" + visitId

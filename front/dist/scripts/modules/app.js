@@ -97,6 +97,13 @@ Class("Vet", {
             controlerAs: 'operazioniCtrl'
         })
 
+        .when('/operation/:id', {
+            // Use the same partial views for for all languages
+            templateUrl: '../views/operazioniDetail.html',
+            controller: 'OperationDetailController',
+            controlerAs: 'operazioniDetailCtrl'
+        })
+
         /*
             404 NOT FOUND
         */

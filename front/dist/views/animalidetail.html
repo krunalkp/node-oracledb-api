@@ -92,13 +92,13 @@
           <div class="form-group">
             <label for="animalRace">Razza</label>
             <select id="animalRace" class="form-control">
-              <option ng-repeat="race in races" value="{{race}}">{{race}}</option>
+              <option ng-repeat="race in races" value="{{race[0]}}-{{race[1]}}">{{race[0]}} : {{race[1]}}</option>
             </select>
           </div>
           <div class="form-group">
             <label for="animalOwner">Padrone</label>
             <select id="animalOwner" class="form-control">
-              <option ng-repeat="owner in owners" value="{{owner}}">{{owner}}</option>
+              <option ng-repeat="owner in owners" value="{{owner[0]}}">{{owner[0]}} - {{owner[1]}} {{owner[2]}}</option>
             </select>
           </div>
         </form>

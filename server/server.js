@@ -534,6 +534,68 @@ router.route('/visitby/:_id')
 
 // on routes that end in /visit/:bear_id
 // ----------------------------------------------------
+
+router.route('/visitoperation')
+
+    .post(function(req, res) {
+
+        // creating connection to db
+        db.connect().then(function(connection) {
+            // performing insert
+            db.insert(connection, "vet_visit_operations", [req.body.visit, req.body.operation], function(connection, data) {
+                res.send(data);
+                db.close(connection);
+            });
+        }).catch(function() {
+            // something bad happened
+            console.log("Error in post visit operations to db");
+            res.send("Error in post visit operations to db");
+        });
+    })
+
+    .get(function(req, res) {
+        // getting all
+        db.connect().then(function(connection) {
+            // querying for all the types
+            db.selectAll(connection, "vet_visit_operations", function(connection, data) {
+                db.close(connection)
+                res.send(data);
+            });
+        }).catch(function() {
+            // error handling
+            console.log("Error connecting to db");
+            res.send("Error connecting to db");
+        });
+    });
+
+router.route('/operationvisit/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_visit_operation").where("visit", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    });
+
+router.route('/visitoperation/:_id')
+
+    // get the bear with that id
+    .get(function(req, res) {
+        // req.params._id
+        // req.body.param
+        db.connect().then(function(connection) {
+            db.select(connection, "*").from("vet_visit_operation").where("operation", "=", "'" + req.params._id + "'").execute(function(data) {
+                res.send(data);
+            });
+        });
+    });
+
+
+
 router.route('/animalby/:_id')
 
     // get the bear with that id

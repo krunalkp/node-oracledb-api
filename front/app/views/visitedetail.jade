@@ -4,9 +4,12 @@ div.page-header
 
     
 div.row(style="margin-bottom: 20px;")
-    div.col-lg-12
+    div.col-lg-4
         // this button should trigger the new animal modal
         button.btn.btn-default(type="button", data-toggle="modal", data-target="#visitModal") Modifica
+    div.col-lg-4
+        // this button should trigger the new animal modal
+        button.btn.btn-default(type="button", data-toggle="modal", data-target="#operationModal") Aggiungi Operazione
 
 div.jumbotron
     h4 codice visita: {{visitId}}
@@ -16,6 +19,21 @@ div.jumbotron
     p {{note}}
     p
         a.btn.btn-default.btn-lg(ng-href="#/animal/{{animal}}", href="#", role="button") Scheda Animale
+
+div.row(style="margin-bottom: 20px;")
+    div.col-lg-4
+        h5 Elenco Operazioni:
+    div.col-lg-7.input-group
+        span#search-label.input-group-addon Cerca
+        input.form-control(type="text", ng-model="query", aria-describedby="search-label")
+            
+table.table.table-bordered(data-height="300")
+    thead
+        tr
+            th Tipo di Operazione
+    tr(ng-repeat="operation in operations | filter:query", id="{{operation[0]}}")
+        td
+            a(ng-href="#/operation/{{operation[0]}}", href="#") {{operation[0]}}
 
 // new visit modal
 
@@ -41,5 +59,22 @@ div#visitModal.modal.fade(tabindex="-1", role="dialog")
             div.modal-footer
                 button.btn.btn-default(type="button", data-dismiss="modal") Close 
                 button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="modifyVisit()") Save changes
+
+div#visitModal.modal.fade(tabindex="-1", role="dialog")
+    div.modal-dialog(role="document")
+        div.modal-content
+            div.modal-header
+                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                    span(aria-hidden="true") &times;
+                h4.modal-title Aggiungi Operazione
+            div.modal-body
+                form
+                    div.form-group
+                        label(for="visitOperation") Operazioni
+                        select#visitOperation.form-control
+                            option(ng-repeat="operation in operations", value="{{operation[0]}}") {{operation[0]}}
+            div.modal-footer
+                button.btn.btn-default(type="button", data-dismiss="modal") Close 
+                button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="addOperation()") Save changes
 
 script document.getElementById("visitNotes").value = "{{note}}";
