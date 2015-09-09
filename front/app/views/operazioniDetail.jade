@@ -12,4 +12,4 @@ table.table.table-bordered(data-height="300")
             th Visita
     tr(ng-repeat="visit in visits | filter:query", id="{{visit[0]}}")
         td
-            a(ng-href="#/visit/{{visit[1]}}", href="#") {{visit[1]}}
+            a(ng-href="#/visit/{{visit[0]}}", href="#") {{visit[0]}}

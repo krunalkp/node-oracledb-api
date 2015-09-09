@@ -46,6 +46,22 @@ Class("VisiteDetailController",{
             $scope.animals = [["Error while connecting to server.", "", "", "", ""]];
         });
 
+        // retrieving all operation ( cane, gatto.. )
+        $scope.operations_list = [[""]];
+        API.getAllOperations().then(function(response) {
+            if (response.data.status == "ok") {
+                $scope.operations_list = response.data.message.rows;
+                if ($scope.operations_list.length == 0) {
+                    $scope.operations_list = [["No operation in DB, please create one"]];
+                }
+            } else {
+                // no operation in our db
+                $scope.operations_list = [["No operation in DB, please create one"]];
+            }
+        }, function(error) {
+            $scope.operations_list = [["ERROR"]];
+        });
+
         // recupero tutte le operazioni di questa visita
         $scope.operations = [[""]];
         API.getOperationByVisit(visitId).then(function(response) {

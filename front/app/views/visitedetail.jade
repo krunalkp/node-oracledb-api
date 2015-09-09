@@ -31,9 +31,9 @@ table.table.table-bordered(data-height="300")
     thead
         tr
             th Tipo di Operazione
-    tr(ng-repeat="operation in operations | filter:query", id="{{operation[0]}}")
+    tr(ng-repeat="operation in operations | filter:query", id="{{operation[1]}}")
         td
-            a(ng-href="#/operation/{{operation[0]}}", href="#") {{operation[0]}}
+            a(ng-href="#/operation/{{operation[1]}}", href="#") {{operation[1]}}
 
 // new visit modal
 
@@ -72,7 +72,7 @@ div#operationModal.modal.fade(tabindex="-1", role="dialog")
                     div.form-group
                         label(for="visitOperation") Operazioni
                         select#visitOperation.form-control
-                            option(ng-repeat="operation in operations", value="{{operation[0]}}") {{operation[0]}}
+                            option(ng-repeat="operation in operations_list", value="{{operation[0]}}") {{operation[0]}}
             div.modal-footer
                 button.btn.btn-default(type="button", data-dismiss="modal") Close 
                 button.btn.btn-primary(type="button", data-dismiss="modal", ng-click="addOperation()") Save changes

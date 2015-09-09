@@ -5,12 +5,12 @@ Class("OperationDetailController", {
 
     control: function($scope, $route, $routeParams, API) {
 
-        var operationid = $routeParams.id;
+        var operationId = $routeParams.id;
         $scope.operationId = operationId;
 
         // retrieving all visit ( cane, gatto.. )
         $scope.visits = [[""]];
-        API.getVisitByOperation(operationid).then(function(response) {
+        API.getVisitByOperation(operationId).then(function(response) {
             if (response.data.status == "ok") {
                 $scope.visits = response.data.message.rows;
                 if ($scope.visits.length == 0) {
