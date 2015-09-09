@@ -575,7 +575,7 @@ router.route('/operationvisit/:_id')
         // req.params._id
         // req.body.param
         db.connect().then(function(connection) {
-            db.select(connection, "*").from("vet_visit_operation").where("visit", "=", "'" + req.params._id + "'").execute(function(data) {
+            db.select(connection, "*").from("vet_visit_operations").where("visit", "=", "'" + req.params._id + "'").execute(function(data) {
                 res.send(data);
             });
         });
@@ -588,7 +588,7 @@ router.route('/visitoperation/:_id')
         // req.params._id
         // req.body.param
         db.connect().then(function(connection) {
-            db.select(connection, "*").from("vet_visit_operation").where("operation", "=", "'" + req.params._id + "'").execute(function(data) {
+            db.select(connection, "*").from("vet_visit_operations").where("operation", "=", "'" + req.params._id + "'").execute(function(data) {
                 res.send(data);
             });
         });
