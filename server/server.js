@@ -197,6 +197,18 @@ router.route('/type')
         });
     });
 
+router.route('/type/:_id')
+    // delete the type with this id
+    .delete(function(req, res) {
+        // rimozione 
+        db.connect().then(function(connection) {
+            db.delete(connection, "vet_types", "type = '" + parseField(req.params._id) + "'", function(connection, data) {
+                db.close(connection);
+                console.log(data);
+                res.send(data);
+            });
+        })
+    });
 // on routes that end in /owner
 // ----------------------------------------------------
 router.route('/owner')
