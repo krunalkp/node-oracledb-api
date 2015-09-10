@@ -364,7 +364,7 @@ router.route('/race/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_races", "race = " + req.params._id, function(connection, data) {
+            db.delete(connection, "vet_races", "race = " + parseField(req.params._id), function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
