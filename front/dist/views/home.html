@@ -12,8 +12,6 @@
       <th>Razza</th>
       <th>Padrone</th>
       <th>Tipo</th>
-      <!-- this line is used to modify data-->
-      <th></th>
     </tr>
   </thead>
   <tr ng-repeat="animal in animals | filter:query" id="{{animal[0]}}">
@@ -24,10 +22,6 @@
     <td><a ng-href="#/race/{{animal[4]}}" href="#">{{animal[4]}}</a></td>
     <td>{{animal[5]}}</td>
     <td><a ng-href="#/type/{{animal[6]}}" href="#">{{animal[6]}}</a></td>
-    <td>
-      <button ng-click="deleteAnimal(this)" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
-      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
-    </td>
   </tr>
 </table>
 <div class="page-header">

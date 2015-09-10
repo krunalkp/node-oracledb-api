@@ -430,7 +430,7 @@ router.route('/operation/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_operations", "type = " + req.params._id, function(connection, data) {
+            db.delete(connection, "vet_operations", "type = " + parseField(req.params._id), function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });

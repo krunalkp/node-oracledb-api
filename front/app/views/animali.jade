@@ -14,7 +14,7 @@ table.table.table-bordered(data-height="300")
         tr
             th codice
             th Nome
-            th Data
+            th Data di nascita
             th Genere
             th Razza
             th Padrone
@@ -33,10 +33,8 @@ table.table.table-bordered(data-height="300")
         td
             a(ng-href="#/type/{{animal[6]}}", href="#") {{animal[6]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteAnimal(this)")
+            button.btn.btn-default.btn-danger.btn-xs(ng-click="deleteAnimal(this)")
                 span.glyphicon.glyphicon-remove
-            button.btn.btn-default.btn-xs
-                span.glyphicon.glyphicon-pencil
 
 // new animal modal
 

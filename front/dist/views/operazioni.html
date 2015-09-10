@@ -21,8 +21,7 @@
   <tr ng-repeat="operation in operations | filter:query" id="{{operation[0]}}">
     <td><a ng-href="#/operation/{{operation[0]}}" href="#">{{operation[0]}}</a></td>
     <td>
-      <button ng-click="deleteOperation(this);" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
-      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+      <button ng-click="deleteOperation(this);" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
     </td>
   </tr>
 </table>

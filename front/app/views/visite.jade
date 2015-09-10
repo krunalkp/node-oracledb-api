@@ -26,10 +26,8 @@ table.table.table-bordered(data-height="300", width="100%", style="table-layout:
         td
             a(ng-href="#/animal/{{visit[3]}}", href="#") {{visit[3]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteVisit(this)")
+            button.btn.btn-danger.btn-xs(ng-click="deleteVisit(this)")
                 span.glyphicon.glyphicon-remove
-            button.btn.btn-default.btn-xs
-                span.glyphicon.glyphicon-pencil
 
 // new visit modal
 

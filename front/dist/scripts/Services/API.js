@@ -49,7 +49,7 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         var url = BASE_URL + "/animal";
         var params = {
             name: name,
-            anim_date: date,
+            date: date,
             race: race,
             genre: genre,
             owner: owner,
@@ -242,9 +242,9 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         // creating a new Visit
         var url = BASE_URL + "/visit";
         var params = {
-            visit_date: date,
+            date: date,
             animal: animal,
-            note: note
+            notes: note
         }
         return $http.post(url, params);
     };

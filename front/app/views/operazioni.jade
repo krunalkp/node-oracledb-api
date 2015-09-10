@@ -18,10 +18,8 @@ table.table.table-bordered(data-height="300")
         td
             a(ng-href="#/operation/{{operation[0]}}", href="#") {{operation[0]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteOperation(this);")
+            button.btn.btn-danger.btn-xs(ng-click="deleteOperation(this);")
                 span.glyphicon.glyphicon-remove
-            button.btn.btn-default.btn-xs
-                span.glyphicon.glyphicon-pencil
 
 // new operation modal
 

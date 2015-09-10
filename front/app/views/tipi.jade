@@ -15,10 +15,8 @@ table.table.table-bordered(data-height="300")
         td
             a(ng-href="#/type/{{type[0]}}", href="#") {{type[0]}}
         td
-            button.btn.btn-default.btn-xs(ng-click="deleteType(this);")
+            button.btn.btn-danger.btn-xs(ng-click="deleteType(this);")
                 span.glyphicon.glyphicon-remove
-            button.btn.btn-default.btn-xs
-                span.glyphicon.glyphicon-pencil
 
 // new type modal
 

@@ -18,8 +18,7 @@
   <tr ng-repeat="type in types" id="{{type[0]}}">
     <td><a ng-href="#/type/{{type[0]}}" href="#">{{type[0]}}</a></td>
     <td>
-      <button ng-click="deleteType(this);" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
-      <button class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></button>
+      <button ng-click="deleteType(this);" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
     </td>
   </tr>
 </table>
