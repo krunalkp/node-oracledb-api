@@ -202,7 +202,7 @@ router.route('/type/:_id')
     .delete(function(req, res) {
         // rimozione 
         db.connect().then(function(connection) {
-            db.delete(connection, "vet_types", "type = '" + parseField(req.params._id) + "'", function(connection, data) {
+            db.delete(connection, "vet_types", "type = '" + req.params._id + "'", function(connection, data) {
                 db.close(connection);
                 console.log(data);
                 res.send(data);

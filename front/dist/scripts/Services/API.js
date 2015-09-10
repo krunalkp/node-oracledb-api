@@ -178,6 +178,11 @@ new Service("Veterinario.Services", "API", "http", function($http) {
         return $http.post(url, params);
     };
 
+    API.deleteType = function(type) {
+        var url = BASE_URL + "/type/" + type;
+        return $http.delete(url);
+    }
+
     /*------------------------------------
         operationS
     ------------------------------------*/
