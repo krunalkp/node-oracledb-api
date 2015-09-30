@@ -143,7 +143,7 @@ Class("AnimaliDetailController",{
             var owner = $('#animalOwner').val();
 
             
-            API.setAnimal(animalId, name, date, genre, race, owner).then(function(response) {
+            API.setAnimal(animalId, name, date, race.split('-')[0], genre, owner).then(function(response) {
                 if (response.data.status == "ok") {
                     // showing success dialog
                     swal("Success!", "THe animal has been modified.", "success");
