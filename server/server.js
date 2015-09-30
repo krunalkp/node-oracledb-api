@@ -137,7 +137,7 @@ router.route('/animal/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_animals", "code = " + parseField(req.params._id), req.body, function() {
+            db.update(connection, "vet_animals", "code = " + parseField(req.params._id), req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
@@ -353,7 +353,7 @@ router.route('/race/:_id')
     .put(function(req, res) {
         // aggiornamento
         db.connect().then(function(connection) {
-            db.update(connection, "vet_races", "race = " + parseField(req.params._id) , req.body, function() {
+            db.update(connection, "vet_races", "race = " + parseField(req.params._id) , req.body, function(connection, data) {
                 db.close(connection);
                 res.send(data);
             });
