@@ -1,8 +1,8 @@
 new Service("Veterinario.Services", "API", "http", function($http) {
 
     var API = {};
-    var IPs = ["192.168.1.92", "192.168.0.108", "10.13.246.169"];
-    var BASE_URL = "http://"+IPs[1]+":10000/api";//"http://10.13.246.169:10000/api"
+    var IPs = ["192.168.1.92", "192.168.0.108", "10.13.246.169", "10.13.248.54"];
+    var BASE_URL = "http://"+IPs[3]+":10000/api";//"http://10.13.246.169:10000/api"
 
     API.testConnection = function() {
         return $http({

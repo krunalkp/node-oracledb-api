@@ -47,7 +47,7 @@ div#visitModal.modal.fade(tabindex="-1", role="dialog")
                         label(for="visitNotes") Note
                         textarea#visitNotes.form-control(type="text", placeholder="Inserisci un nome", rows="10")
                     div.form-group
-                        label(for="visitAnimal") Razza
+                        label(for="visitAnimal") Animale
                         select#visitAnimal.form-control
                             option(ng-repeat="animal in animals", value="{{animal[0]}}") {{animal[0]}} : {{animal[1]}}
             div.modal-footer
